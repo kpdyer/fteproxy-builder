@@ -27,7 +27,7 @@ macosx-i386:
 	@cd $(BUILD_DIR_ABSPATH)/macosx-i386; \
 	vagrant up; \
 	vagrant provision; \
-	scp -i $(SSH_DIR_ABSPATH)/id_rsa vagrant@192.168.10.10:/vagrant/fteproxy/dist/*.tar.gz $(ARTIFACT_DIR_ABSPATH)/; \
+	scp -i $(SSH_DIR_ABSPATH)/id_rsa vagrant@192.168.10.10:~/fteproxy/dist/*.tar.gz $(ARTIFACT_DIR_ABSPATH)/; \
 	vagrant destroy -f
 
 windows-i386:
@@ -39,19 +39,19 @@ windows-i386:
 	vagrant destroy -f
 
 clean:
-	rm -v $(ARTIFACT_DIR_ABSPATH)/*
+	rm -vf $(ARTIFACT_DIR_ABSPATH)/*
 	@cd $(BUILD_DIR_ABSPATH)/gnulinux-i386; \
 	vagrant destroy -f
 	@cd $(BUILD_DIR_ABSPATH)/gnulinux-i386; \
-	rm -rvf .vagrant
+	rm -rvf .vagrant fteproxy build_fteproxy.sh
 	@cd $(BUILD_DIR_ABSPATH)/gnulinux-x86_64; \
 	vagrant destroy -f
 	@cd $(BUILD_DIR_ABSPATH)/gnulinux-x86_64; \
-	rm -rvf .vagrant
+	rm -rvf .vagrant fteproxy build_fteproxy.sh
 	@cd $(BUILD_DIR_ABSPATH)/macosx-i386; \
 	vagrant destroy -f
 	@cd $(BUILD_DIR_ABSPATH)/macosx-i386; \
-	rm -rvf .vagrant
+	rm -rvf .vagrant fteproxy build_fteproxy.sh
 	@cd $(BUILD_DIR_ABSPATH)/windows-i386; \
 	vagrant destroy -f
 	@cd $(BUILD_DIR_ABSPATH)/windows-i386; \
