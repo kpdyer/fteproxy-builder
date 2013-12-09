@@ -8,30 +8,30 @@ SSH_DIR_ABSPATH=$(realpath $(SSH_DIR))
 
 all: gnulinux-i386 gnulinux-x86_64 macosx-i386 windows-i386
 
-gnulinux-i386:
+setup:
+	chmod 600 $(SSH_DIR_ABSPATH)/id_rsa
 	mkdir -p $(ARTIFACT_DIR_ABSPATH)
+
+gnulinux-i386: setup
 	@cd $(BUILD_DIR_ABSPATH)/gnulinux-i386; \
 	vagrant up; \
 	vagrant destroy -f; \
 	cp fteproxy/dist/*.tar.gz $(ARTIFACT_DIR_ABSPATH)/
 
-gnulinux-x86_64:
-	mkdir -p $(ARTIFACT_DIR_ABSPATH)
+gnulinux-x86_64: setup
 	@cd $(BUILD_DIR_ABSPATH)/gnulinux-x86_64; \
 	vagrant up; \
 	vagrant destroy -f; \
 	cp fteproxy/dist/*.tar.gz $(ARTIFACT_DIR_ABSPATH)/
 
-macosx-i386:
-	mkdir -p $(ARTIFACT_DIR_ABSPATH)
+macosx-i386: setup
 	@cd $(BUILD_DIR_ABSPATH)/macosx-i386; \
 	vagrant up; \
 	vagrant provision; \
 	scp -i $(SSH_DIR_ABSPATH)/id_rsa vagrant@192.168.10.10:/vagrant/fteproxy/dist/*.tar.gz $(ARTIFACT_DIR_ABSPATH)/; \
 	vagrant destroy -f
 
-windows-i386:
-	mkdir -p $(ARTIFACT_DIR_ABSPATH)
+windows-i386: setup
 	@cd $(BUILD_DIR_ABSPATH)/windows-i386; \
 	vagrant up; \
 	vagrant provision; \
