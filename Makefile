@@ -2,8 +2,8 @@ BUILD_DIR=./build
 ARTIFACT_DIR=./dist
 SSH_DIR=./.ssh
 
-FTEPROXY_TAG=a3df7b4bf5
-FTEPROXY_VERSION=0.2.1
+FTEPROXY_VERSION=0.2.3
+FTEPROXY_TAG=48dbeb1917af947f00d5122b5060cbbb9ff4f132
 
 BUILD_DIR_ABSPATH=$(realpath $(BUILD_DIR))
 ARTIFACT_DIR_ABSPATH=$(realpath $(ARTIFACT_DIR))
@@ -48,18 +48,17 @@ dist/fteproxy-$(FTEPROXY_VERSION)-darwin-i386.tar.gz:
 	@cd $(BUILD_DIR_ABSPATH)/macosx-i386; \
 	vagrant up; \
 	vagrant provision; \
-	scp -i $(SSH_DIR_ABSPATH)/id_rsa vagrant@192.168.10.10:/vagrant/fteproxy/dist/*.tar.gz $(ARTIFACT_DIR_ABSPATH)/; \
+	scp -oStrictHostKeyChecking=no -i $(SSH_DIR_ABSPATH)/id_rsa vagrant@192.168.10.10:/vagrant/fteproxy/dist/*.tar.gz $(ARTIFACT_DIR_ABSPATH)/; \
 	vagrant destroy -f
 
 dist/fteproxy-$(FTEPROXY_VERSION)-windows-i686.tar.gz:
 	@cd $(BUILD_DIR_ABSPATH)/windows-i386; \
 	vagrant up; \
 	vagrant provision; \
-	scp -i $(SSH_DIR_ABSPATH)/id_rsa vagrant@192.168.10.11:/vagrant/fteproxy/dist/*.tar.gz $(ARTIFACT_DIR_ABSPATH)/; \
+	scp -oStrictHostKeyChecking=no -i $(SSH_DIR_ABSPATH)/id_rsa vagrant@192.168.10.11:/vagrant/fteproxy/dist/*.tar.gz $(ARTIFACT_DIR_ABSPATH)/; \
 	vagrant destroy -f
 
 clean:
-#	rm -vf $(ARTIFACT_DIR_ABSPATH)/*
 	@cd $(BUILD_DIR_ABSPATH)/gnulinux-i386; \
 	vagrant destroy -f
 	@cd $(BUILD_DIR_ABSPATH)/gnulinux-i386; \

@@ -10,4 +10,4 @@ cd $WORKING_DIR
 rm -rfv fteproxy
 git clone https://github.com/kpdyer/fteproxy.git
 cd fteproxy
-make -j`nproc`
+make dist
