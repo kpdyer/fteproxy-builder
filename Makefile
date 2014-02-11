@@ -21,7 +21,7 @@ gnulinux-x86_64: dist/fteproxy-$(FTEPROXY_TAG)-linux-x86_64.tar.gz
 macosx-i386: dist/fteproxy-$(FTEPROXY_TAG)-darwin-i386.tar.gz
 windows-i386: dist/fteproxy-$(FTEPROXY_TAG)-windows-i686.tar.gz
 
-dist/fteproxy-$(FTEPROXY_VERSION)-src.tar.gz:
+dist/fteproxy-$(FTEPROXY_TAG)-src.tar.gz:
 	cd dist; \
 	wget https://github.com/kpdyer/fteproxy/archive/$(FTEPROXY_TAG).zip; \
 	unzip $(FTEPROXY_TAG).zip; \
@@ -31,21 +31,21 @@ dist/fteproxy-$(FTEPROXY_VERSION)-src.tar.gz:
 	rm -rfv fteproxy-$(FTEPROXY_TAG)-src; \
 	rm -fv $(FTEPROXY_TAG).zip
 
-dist/fteproxy-$(FTEPROXY_VERSION)-linux-i686.tar.gz:
+dist/fteproxy-$(FTEPROXY_TAG)-linux-i686.tar.gz:
 	@cd $(BUILD_DIR_ABSPATH)/gnulinux-i386; \
 	vagrant up; \
 	vagrant destroy -f; \
 	mkdir -p $(ARTIFACT_DIR_ABSPATH); \
 	cp fteproxy/dist/*.tar.gz $(ARTIFACT_DIR_ABSPATH)/
 
-dist/fteproxy-$(FTEPROXY_VERSION)-linux-x86_64.tar.gz:
+dist/fteproxy-$(FTEPROXY_TAG)-linux-x86_64.tar.gz:
 	@cd $(BUILD_DIR_ABSPATH)/gnulinux-x86_64; \
 	vagrant up; \
 	vagrant destroy -f; \
 	mkdir -p $(ARTIFACT_DIR_ABSPATH); \
 	cp fteproxy/dist/*.tar.gz $(ARTIFACT_DIR_ABSPATH)/
 
-dist/fteproxy-$(FTEPROXY_VERSION)-darwin-i386.tar.gz:
+dist/fteproxy-$(FTEPROXY_TAG)-darwin-i386.tar.gz:
 	@cd $(BUILD_DIR_ABSPATH)/macosx-i386; \
 	vagrant up; \
 	vagrant provision; \
@@ -53,7 +53,7 @@ dist/fteproxy-$(FTEPROXY_VERSION)-darwin-i386.tar.gz:
 	scp -oStrictHostKeyChecking=no -i $(SSH_DIR_ABSPATH)/id_rsa vagrant@192.168.10.10:/vagrant/fteproxy/dist/*.tar.gz $(ARTIFACT_DIR_ABSPATH)/; \
 	vagrant destroy -f
 
-dist/fteproxy-$(FTEPROXY_VERSION)-windows-i686.tar.gz:
+dist/fteproxy-$(FTEPROXY_TAG)-windows-i686.tar.gz:
 	@cd $(BUILD_DIR_ABSPATH)/windows-i386; \
 	vagrant up; \
 	vagrant provision; \
