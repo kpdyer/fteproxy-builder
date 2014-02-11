@@ -11,8 +11,8 @@ SSH_DIR_ABSPATH=$(realpath $(SSH_DIR))
 all: .envsetup src gnulinux-i386 gnulinux-x86_64 macosx-i386 windows-i386
 
 .envsetup:
-	chmod 600 $(SSH_DIR_ABSPATH)/id_rsa
-	mkdir -p $(ARTIFACT_DIR_ABSPATH)
+	chmod 600 $(SSH_DIR)/id_rsa
+	mkdir -p $(ARTIFACT_DIR)
 	touch .envsetup
 
 src: dist/fteproxy-$(FTEPROXY_TAG)-src.tar.gz
