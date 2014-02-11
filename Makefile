@@ -12,7 +12,6 @@ all: .envsetup src gnulinux-i386 gnulinux-x86_64 macosx-i386 windows-i386
 
 .envsetup:
 	chmod 600 $(SSH_DIR)/id_rsa
-	mkdir -p $(ARTIFACT_DIR)
 	touch .envsetup
 
 src: dist/fteproxy-$(FTEPROXY_TAG)-src.tar.gz
@@ -35,21 +34,18 @@ dist/fteproxy-$(FTEPROXY_TAG)-linux-i686.tar.gz:
 	@cd $(BUILD_DIR_ABSPATH)/gnulinux-i386; \
 	vagrant up; \
 	vagrant destroy -f; \
-	mkdir -p $(ARTIFACT_DIR_ABSPATH); \
 	cp fteproxy/dist/*.tar.gz $(ARTIFACT_DIR_ABSPATH)/
 
 dist/fteproxy-$(FTEPROXY_TAG)-linux-x86_64.tar.gz:
 	@cd $(BUILD_DIR_ABSPATH)/gnulinux-x86_64; \
 	vagrant up; \
 	vagrant destroy -f; \
-	mkdir -p $(ARTIFACT_DIR_ABSPATH); \
 	cp fteproxy/dist/*.tar.gz $(ARTIFACT_DIR_ABSPATH)/
 
 dist/fteproxy-$(FTEPROXY_TAG)-darwin-i386.tar.gz:
 	@cd $(BUILD_DIR_ABSPATH)/macosx-i386; \
 	vagrant up; \
 	vagrant provision; \
-	mkdir -p $(ARTIFACT_DIR_ABSPATH); \
 	scp -oStrictHostKeyChecking=no -i $(SSH_DIR_ABSPATH)/id_rsa vagrant@192.168.10.10:/vagrant/fteproxy/dist/*.tar.gz $(ARTIFACT_DIR_ABSPATH)/; \
 	vagrant destroy -f
 
@@ -57,7 +53,6 @@ dist/fteproxy-$(FTEPROXY_TAG)-windows-i686.tar.gz:
 	@cd $(BUILD_DIR_ABSPATH)/windows-i386; \
 	vagrant up; \
 	vagrant provision; \
-	mkdir -p $(ARTIFACT_DIR_ABSPATH); \
 	scp -oStrictHostKeyChecking=no -i $(SSH_DIR_ABSPATH)/id_rsa vagrant@192.168.10.11:/vagrant/fteproxy/dist/*.tar.gz $(ARTIFACT_DIR_ABSPATH)/; \
 	vagrant destroy -f
 
