@@ -2,7 +2,7 @@ BUILD_DIR=./build
 ARTIFACT_DIR=./dist
 SSH_DIR=./.ssh
 
-FTEPROXY_VERSION=0.2.7
+FTEPROXY_TAG=0.2.6
 
 BUILD_DIR_ABSPATH=$(realpath $(BUILD_DIR))
 ARTIFACT_DIR_ABSPATH=$(realpath $(ARTIFACT_DIR))
@@ -15,20 +15,20 @@ all: .envsetup src gnulinux-i386 gnulinux-x86_64 macosx-i386 windows-i386
 	mkdir -p $(ARTIFACT_DIR_ABSPATH)
 	touch .envsetup
 
-src: dist/fteproxy-$(FTEPROXY_VERSION)-src.tar.gz
-gnulinux-i386: dist/fteproxy-$(FTEPROXY_VERSION)-linux-i686.tar.gz
-gnulinux-x86_64: dist/fteproxy-$(FTEPROXY_VERSION)-linux-x86_64.tar.gz
-macosx-i386: dist/fteproxy-$(FTEPROXY_VERSION)-darwin-i386.tar.gz
-windows-i386: dist/fteproxy-$(FTEPROXY_VERSION)-windows-i686.tar.gz
+src: dist/fteproxy-$(FTEPROXY_TAG)-src.tar.gz
+gnulinux-i386: dist/fteproxy-$(FTEPROXY_TAG)-linux-i686.tar.gz
+gnulinux-x86_64: dist/fteproxy-$(FTEPROXY_TAG)-linux-x86_64.tar.gz
+macosx-i386: dist/fteproxy-$(FTEPROXY_TAG)-darwin-i386.tar.gz
+windows-i386: dist/fteproxy-$(FTEPROXY_TAG)-windows-i686.tar.gz
 
 dist/fteproxy-$(FTEPROXY_VERSION)-src.tar.gz:
 	cd dist; \
 	wget https://github.com/kpdyer/fteproxy/archive/$(FTEPROXY_TAG).zip; \
 	unzip $(FTEPROXY_TAG).zip; \
-	mv fteproxy-$(FTEPROXY_TAG) fteproxy-$(FTEPROXY_VERSION)-src; \
-	tar cvf fteproxy-$(FTEPROXY_VERSION)-src.tar fteproxy-$(FTEPROXY_VERSION)-src; \
-	gzip -9 fteproxy-$(FTEPROXY_VERSION)-src.tar; \
-	rm -rfv fteproxy-$(FTEPROXY_VERSION)-src; \
+	mv fteproxy-$(FTEPROXY_TAG) fteproxy-$(FTEPROXY_TAG)-src; \
+	tar cvf fteproxy-$(FTEPROXY_TAG)-src.tar fteproxy-$(FTEPROXY_TAG)-src; \
+	gzip -9 fteproxy-$(FTEPROXY_TAG)-src.tar; \
+	rm -rfv fteproxy-$(FTEPROXY_TAG)-src; \
 	rm -fv $(FTEPROXY_TAG).zip
 
 dist/fteproxy-$(FTEPROXY_VERSION)-linux-i686.tar.gz:
