@@ -49,11 +49,11 @@ dist/fteproxy-$(FTEPROXY_TAG)-darwin-i386.tar.gz:
 	scp -oStrictHostKeyChecking=no -i $(SSH_DIR_ABSPATH)/id_rsa vagrant@192.168.10.10:/vagrant/fteproxy/dist/*.tar.gz $(ARTIFACT_DIR_ABSPATH)/; \
 	vagrant destroy -f
 
-dist/fteproxy-$(FTEPROXY_TAG)-windows-i686.tar.gz:
+dist/fteproxy-$(FTEPROXY_TAG)-windows-i686.zip:
 	@cd $(BUILD_DIR_ABSPATH)/windows-i386; \
 	vagrant up; \
 	vagrant provision; \
-	scp -oStrictHostKeyChecking=no -i $(SSH_DIR_ABSPATH)/id_rsa vagrant@192.168.10.11:/vagrant/fteproxy/dist/*.tar.gz $(ARTIFACT_DIR_ABSPATH)/; \
+	scp -oStrictHostKeyChecking=no -i $(SSH_DIR_ABSPATH)/id_rsa vagrant@192.168.10.11:/vagrant/fteproxy/dist/*.zip $(ARTIFACT_DIR_ABSPATH)/; \
 	vagrant destroy -f
 
 clean:
