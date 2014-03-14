@@ -18,7 +18,7 @@ src: dist/fteproxy-$(FTEPROXY_TAG)-src.tar.gz
 gnulinux-i386: dist/fteproxy-$(FTEPROXY_TAG)-linux-i686.tar.gz
 gnulinux-x86_64: dist/fteproxy-$(FTEPROXY_TAG)-linux-x86_64.tar.gz
 macosx-i386: dist/fteproxy-$(FTEPROXY_TAG)-darwin-i386.tar.gz
-windows-i386: dist/fteproxy-$(FTEPROXY_TAG)-windows-i686.tar.gz
+windows-i386: dist/fteproxy-$(FTEPROXY_TAG)-windows-i686.zip
 
 dist/fteproxy-$(FTEPROXY_TAG)-src.tar.gz:
 	cd dist; \
