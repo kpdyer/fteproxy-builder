@@ -5,6 +5,5 @@ echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAAAYQDD0chapoUrTaPR6xbI6gLFU+Y/Lcc7YPWFbw
 sudo mkdir -p /vagrant
 sudo chown vagrant:staff /vagrant
 cd /vagrant
-curl https://raw.github.com/kpdyer/fteproxy/master/BUILDING.osx > build_fteproxy.sh
 chmod 755 build_fteproxy.sh
 ./build_fteproxy.sh
