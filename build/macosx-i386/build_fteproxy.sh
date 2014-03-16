@@ -17,7 +17,10 @@
 
 # Tested on Debian 7.1.0, Ubuntu 12.04/12.10/13.04/13.10:
 
-WORKING_DIR=/vagrant
+WORKING_DIR=/vagrant/sandbox
+
+mkdir -p $WORKING_DIR
+cd $WORKING_DIR
 
 # depdendencies
 sudo apt-get update
@@ -41,7 +44,6 @@ sudo pip install --upgrade pyinstaller
 sudo touch /usr/local/lib/python2.7/dist-packages/zope/__init__.py
 
 # fteproxy
-cd $WORKING_DIR
 git clone https://github.com/kpdyer/fteproxy.git
 cd fteproxy
 make dist-osx-i686

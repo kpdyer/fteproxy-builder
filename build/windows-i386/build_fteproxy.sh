@@ -17,32 +17,72 @@
 
 # Tested on Debian 7.1.0, Ubuntu 12.04/12.10/13.04/13.10:
 
-export PATH"="C:\\windows\\system32;C:\\windows;Z:\\usr\\i686-pc-mingw32\\sys-root\\mingw\\bin
+WORKING_DIR=/vagrant/sandbox
+INSTDIR=/vagrant/sandbox/opt
+WINEROOT=$HOME/.wine/drive_c
 
-WORKING_DIR=/vagrant
-INSTDIR=/vagrant/sandbox
+mkdir -p $WORKING_DIR
+mkdir -p $INSTDIR
+cd $WORKING_DIR
 
 # depdendencies
 sudo apt-get update
 
 sudo apt-get -y --no-install-recommends install build-essential
 sudo apt-get -y --no-install-recommends install upx
+sudo apt-get -y --no-install-recommends install m4
 sudo apt-get -y --no-install-recommends install git
 sudo apt-get -y --no-install-recommends install python-pip
 sudo apt-get -y --no-install-recommends install g++-mingw-w64
 sudo apt-get -y --no-install-recommends install mingw-w64
 sudo apt-get -y --no-install-recommends install wine
+sudo apt-get -y --no-install-recommends install unzip
+sudo apt-get -y --no-install-recommends install faketime
+sudo apt-get -y --no-install-recommends install p7zip-full
 
-#LD_PRELOAD= wineboot -i
-#wget https://www.python.org/ftp/python/2.7.6/python-2.7.6.msi
-wget http://downloads.activestate.com/ActivePython/releases/2.7.5.6/ActivePython-2.7.5.6-win32-x86.msi
-LD_PRELOAD= msiexec /qn /i ActivePython-2.7.5.6-win32-x86.msi TARGETDIR=$INSTDIR/python
+
+# install python
+#wget http://downloads.activestate.com/ActivePython/releases/2.7.5.6/ActivePython-2.7.5.6-win32-x86.msi
+#LD_PRELOAD= wine msiexec /qn /i ActivePython-2.7.5.6-win32-x86.msi TARGETDIR=$INSTDIR/python
+wget https://www.python.org/ftp/python/2.7.6/python-2.7.6.msi
+LD_PRELOAD= wine msiexec /qn /i python-2.7.6.msi TARGETDIR=$INSTDIR/python
 INSTPYTHON="wine $INSTDIR/python/python.exe"
+INSTEI="wine easy_install"
 
-wget https://raw.github.com/pypa/pip/master/contrib/get-pip.py
-LD_PRELOAD= $INSTPYTHON get-pip.py
-INSTPIP="wine pip"
 
+# install pip
+#wget https://raw.github.com/pypa/pip/master/contrib/get-pip.py
+#LD_PRELOAD= $INSTPYTHON get-pip.py
+#INSTPIP="wine pip"
+
+
+# install py2exe
+wget http://softlayer-ams.dl.sourceforge.net/project/py2exe/py2exe/0.6.9/py2exe-0.6.9.win32-py2.7.exe
+7z x py2exe-0.6.9.win32-py2.7.exe
+cp -a PLATLIB/* /home/vagrant/.wine/drive_c/Python27/Lib/site-packages/
+
+
+# install wrappers, to expose mingw compilers to wine
+cp wine-wrappers
+mkdir -p build/bdist.win32/bundle-2.7/
+cp /home/vagrant/.wine/drive_c/windows/system32/python27.dll build/bdist.win32/bundle-2.7/
+cp /home/vagrant/.wine/drive_c/windows/system32/python27.dll build/bdist.win32/winexe/bundle-2.7/
+$INSTPYTHON setup.py py2exe
+cp -a dist/gcc.exe dist/g++.exe dist/dllwrap.exe dist/swig.exe $WINEROOT/windows/
+
+
+# install gmp
+wget https://ftp.gnu.org/gnu/gmp/gmp-5.1.3.tar.bz2
+tar xvf gmp-5.1.3.tar.bz2
+cd gmp-*
+./configure --prefix=$INSTDIR/gmp --host=i686-w64-mingw32 --enable-cxx --disable-static --enable-shared
+make
+make install
+cd ..
+
+#echo $'[build]\ncompiler=mingw32' > ~/.wine/drive_c/Python27/Lib/distutils/distutils.cfg
+
+# install pycrypto
 wget https://ftp.dlitz.net/pub/dlitz/crypto/pycrypto/pycrypto-2.6.1.tar.gz
 cd pycrypto-*
 # This is bogus, that we run the configure script in the build environment, but it seems to work.
@@ -52,22 +92,31 @@ LD_PRELOAD= $INSTPYTHON setup.py build_ext -c mingw32
 LD_PRELOAD= $INSTPYTHON setup.py install
 cd ..
 
-#$INSTPIP install --upgrade pip
-#$INSTPIP install --upgrade setuptools
-$INSTPIP install --upgrade twisted
-$INSTPIP install --upgrade pycrypto
-$INSTPIP install --upgrade py2exe
 
-#easy
-$INSTPIP install --upgrade obfsproxy
-$INSTPIP install --upgrade pyptlib
+# install twisted
+wget https://pypi.python.org/packages/2.7/T/Twisted/Twisted-13.2.0.win32-py2.7.msi
+LD_PRELOAD= wine msiexec /qn /i Twisted-13.2.0.win32-py2.7.msi
+
+
+# install zope.interface
+$INSTEI zope.interface
+
+
+# install obfsproxy
+$INSTEI obfsproxy
+
+
+# install pytptlib
+$INSTEI pyptlib
+
 
 # see: https://github.com/kpdyer/fteproxy/issues/66
-sudo touch /usr/local/lib/python2.7/dist-packages/zope/__init__.py
+#touch /usr/local/lib/python2.7/dist-packages/zope/__init__.py
 
-# fteproxy
-cd $WORKING_DIR
+
+# buildfteproxy
 git clone https://github.com/kpdyer/fteproxy.git
 cd fteproxy
-LD_PRELOAD= PYTHON=$INSTPYTHON make dist-windows-i386
+ln -s /vagrant/gmp thirdparty/gmp
+LD_PRELOAD= CFLAGS="-I/vagrant/gmp/include" PYTHON=$INSTPYTHON make dist-windows-i386
 make test
