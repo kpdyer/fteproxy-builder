@@ -27,23 +27,24 @@ cd $WORKING_DIR
 
 # depdendencies
 sudo apt-get update
+sudo apt-get -y upgrade
 
-sudo apt-get -y --no-install-recommends install build-essential
-sudo apt-get -y --no-install-recommends install upx
-sudo apt-get -y --no-install-recommends install m4
-sudo apt-get -y --no-install-recommends install git
-sudo apt-get -y --no-install-recommends install python-pip
-sudo apt-get -y --no-install-recommends install g++-mingw-w64
-sudo apt-get -y --no-install-recommends install mingw-w64
-sudo apt-get -y --no-install-recommends install wine
-sudo apt-get -y --no-install-recommends install unzip
-sudo apt-get -y --no-install-recommends install faketime
-sudo apt-get -y --no-install-recommends install p7zip-full
+sudo apt-get -y install build-essential
+sudo apt-get -y install upx
+sudo apt-get -y install m4
+sudo apt-get -y install git
+sudo apt-get -y install python-pip
+sudo apt-get -y install g++-mingw-w64
+sudo apt-get -y install mingw-w64
+sudo apt-get -y install wine
+sudo apt-get -y install unzip
+sudo apt-get -y install faketime
+sudo apt-get -y install p7zip-full
 
 
 # install python
 #wget http://downloads.activestate.com/ActivePython/releases/2.7.5.6/ActivePython-2.7.5.6-win32-x86.msi
-#LD_PRELOAD= wine msiexec /qn /i ActivePython-2.7.5.6-win32-x86.msi TARGETDIR=$INSTDIR/python
+LD_PRELOAD= wineboot -i
 wget https://www.python.org/ftp/python/2.7.6/python-2.7.6.msi
 LD_PRELOAD= wine msiexec /qn /i python-2.7.6.msi TARGETDIR=$INSTDIR/python
 INSTPYTHON="wine $INSTDIR/python/python.exe"
@@ -63,9 +64,8 @@ cp -a PLATLIB/* /home/vagrant/.wine/drive_c/Python27/Lib/site-packages/
 
 
 # install wrappers, to expose mingw compilers to wine
-cp wine-wrappers
-mkdir -p build/bdist.win32/bundle-2.7/
-cp /home/vagrant/.wine/drive_c/windows/system32/python27.dll build/bdist.win32/bundle-2.7/
+cp -rfv ../wine-wrappers .
+cd wine-wrappers
 cp /home/vagrant/.wine/drive_c/windows/system32/python27.dll build/bdist.win32/winexe/bundle-2.7/
 $INSTPYTHON setup.py py2exe
 cp -a dist/gcc.exe dist/g++.exe dist/dllwrap.exe dist/swig.exe $WINEROOT/windows/
@@ -80,7 +80,6 @@ make
 make install
 cd ..
 
-#echo $'[build]\ncompiler=mingw32' > ~/.wine/drive_c/Python27/Lib/distutils/distutils.cfg
 
 # install pycrypto
 wget https://ftp.dlitz.net/pub/dlitz/crypto/pycrypto/pycrypto-2.6.1.tar.gz
@@ -119,4 +118,3 @@ git clone https://github.com/kpdyer/fteproxy.git
 cd fteproxy
 ln -s /vagrant/gmp thirdparty/gmp
 LD_PRELOAD= CFLAGS="-I/vagrant/gmp/include" PYTHON=$INSTPYTHON make dist-windows-i386
-make test

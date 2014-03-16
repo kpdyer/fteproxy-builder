@@ -60,16 +60,16 @@ clean:
 	@cd $(BUILD_DIR_ABSPATH)/gnulinux-i386; \
 	vagrant destroy -f
 	@cd $(BUILD_DIR_ABSPATH)/gnulinux-i386; \
-	rm -rvf .vagrant fteproxy
+	rm -rvf .vagrant sandbox
 	@cd $(BUILD_DIR_ABSPATH)/gnulinux-x86_64; \
 	vagrant destroy -f
 	@cd $(BUILD_DIR_ABSPATH)/gnulinux-x86_64; \
-	rm -rvf .vagrant fteproxy
+	rm -rvf .vagrant sandbox
 	@cd $(BUILD_DIR_ABSPATH)/macosx-i386; \
 	vagrant destroy -f
 	@cd $(BUILD_DIR_ABSPATH)/macosx-i386; \
-	rm -rvf .vagrant fteproxy
+	rm -rvf .vagrant sandbox
 	@cd $(BUILD_DIR_ABSPATH)/windows-i386; \
 	vagrant destroy -f
 	@cd $(BUILD_DIR_ABSPATH)/windows-i386; \
-	rm -rvf .vagrant *.msi
+	rm -rvf .vagrant sandbox
