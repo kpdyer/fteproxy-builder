@@ -2,7 +2,7 @@ BUILD_DIR=./build
 ARTIFACT_DIR=./dist
 SSH_DIR=./.ssh
 
-FTEPROXY_TAG=0.2.6
+FTEPROXY_TAG=master
 
 BUILD_DIR_ABSPATH=$(realpath $(BUILD_DIR))
 ARTIFACT_DIR_ABSPATH=$(realpath $(ARTIFACT_DIR))
@@ -60,16 +60,16 @@ clean:
 	@cd $(BUILD_DIR_ABSPATH)/gnulinux-i386; \
 	vagrant destroy -f
 	@cd $(BUILD_DIR_ABSPATH)/gnulinux-i386; \
-	rm -rvf .vagrant fteproxy build_fteproxy.sh
+	rm -rvf .vagrant fteproxy
 	@cd $(BUILD_DIR_ABSPATH)/gnulinux-x86_64; \
 	vagrant destroy -f
 	@cd $(BUILD_DIR_ABSPATH)/gnulinux-x86_64; \
-	rm -rvf .vagrant fteproxy build_fteproxy.sh
+	rm -rvf .vagrant fteproxy
 	@cd $(BUILD_DIR_ABSPATH)/macosx-i386; \
 	vagrant destroy -f
 	@cd $(BUILD_DIR_ABSPATH)/macosx-i386; \
-	rm -rvf .vagrant fteproxy build_fteproxy.sh
+	rm -rvf .vagrant fteproxy
 	@cd $(BUILD_DIR_ABSPATH)/windows-i386; \
 	vagrant destroy -f
 	@cd $(BUILD_DIR_ABSPATH)/windows-i386; \
-	rm -rvf .vagrant
+	rm -rvf .vagrant *.msi

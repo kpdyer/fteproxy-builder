@@ -25,8 +25,6 @@ sudo apt-get update
 sudo apt-get -y --no-install-recommends install build-essential
 sudo apt-get -y --no-install-recommends install upx
 sudo apt-get -y --no-install-recommends install git
-sudo apt-get -y --no-install-recommends install python-dev
-sudo apt-get -y --no-install-recommends install libgmp-dev
 sudo apt-get -y --no-install-recommends install python-pip
 
 sudo pip install --upgrade pip
@@ -44,4 +42,4 @@ sudo touch /usr/local/lib/python2.7/dist-packages/zope/__init__.py
 cd $WORKING_DIR
 git clone https://github.com/kpdyer/fteproxy.git
 cd fteproxy
-make dist
+make dist-linux-x86_64
