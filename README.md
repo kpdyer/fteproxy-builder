@@ -27,7 +27,9 @@ dist/fteproxy-windows-i386.zip
 Requirements
 ------------
 
-* OSX 10.9
+For details on how to setup your environment, please see ```INSTALL```. In addition, the following four requirements must be met to do full builds for all target platforms.
+
+* OSX 10.9 as the host system
 * Vagrant: http://www.vagrantup.com/
 * VirtualBox: https://www.virtualbox.org
 * Three vagrants boxes:
@@ -36,8 +38,6 @@ Requirements
     * ```debian-7.1.0-amd64``` - used to produce 64-bit linux binaries
 
 Vagrant boxes can be obtained from: http://www.vagrantbox.es/
-
-OSX packages are compiled natively.
 
 
 Author
