@@ -3,6 +3,8 @@ fteproxy-builder
 
 This is a helper-project, which builds fteproxy for all of its target platforms.
 
+fteproxy-builder requires OSX, and has been tested on OSX 10.9.
+
 
 Overview
 --------
@@ -28,10 +30,12 @@ Requirements
 * Vagrant: http://www.vagrantup.com/
 * VirtualBox: https://www.virtualbox.org
 * Three vagrants boxes:
-    * ```ubuntu-12.10-i386``` - used to cross-compile for darwin and windows platforms
+    * ```ubuntu-12.10-i386``` - used to cross-compile for windows platform
       https://cloud-images.ubuntu.com/vagrant/precise/20140313/precise-server-cloudimg-i386-vagrant-disk1.box
     * ```debian-7.1.0-i386``` - used to produce 32-bit linux binaries
     * ```debian-7.1.0-amd64``` - used to produce 64-bit linux binaries
+
+The OSX packages are compiled natively.
 
 
 Author
