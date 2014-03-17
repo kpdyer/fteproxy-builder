@@ -57,8 +57,7 @@ sudo apt-get -y --no-install-recommends install wine
 LD_PRELOAD= wineboot -i
 wget https://www.python.org/ftp/python/2.7.6/python-2.7.6.msi
 LD_PRELOAD= wine msiexec /qn /i python-2.7.6.msi
-export INSTPYTHON="wine C:\\Python27\\python.exe"
-export INSTEI="wine C:\\Python27\\Scripts\\easy_install.exe"
+export PYTHON="wine /home/vagrant/.wine/drive_c/Python27/python.exe"
 
 
 # install py2exe
@@ -72,15 +71,15 @@ export WINEROOT=$HOME/.wine/drive_c
 cp -rfv ../wine-wrappers .
 cd wine-wrappers
 mkdir -p build/bdist.win32/winexe/bundle-2.7
-cp -a C:\\Python27\\python27.dll build/bdist.win32/winexe/bundle-2.7/
-LD_PRELOAD= $INSTPYTHON setup.py py2exe
+cp -a /home/vagrant/.wine/drive_c/Python27/python27.dll build/bdist.win32/winexe/bundle-2.7/
+LD_PRELOAD= $PYTHON setup.py py2exe
 cp -a dist/gcc.exe dist/g++.exe dist/dllwrap.exe dist/swig.exe $WINEROOT/windows/
 cd ..
 
 
 # install pip
 wget https://raw.github.com/pypa/pip/master/contrib/get-pip.py
-LD_PRELOAD= $INSTPYTHON get-pip.py
+LD_PRELOAD= $PYTHON get-pip.py
 
 
 # install gmp
@@ -100,8 +99,8 @@ cd pycrypto-*
 # This is bogus, that we run the configure script in the build environment, but it seems to work.
 # https://bugs.launchpad.net/pycrypto/+bug/1096207 for ac_cv_func_malloc_0_nonnull.
 ac_cv_func_malloc_0_nonnull=yes sh configure --host=i686-w64-mingw32
-LD_PRELOAD= $INSTPYTHON setup.py build_ext -c mingw32
-LD_PRELOAD= $INSTPYTHON setup.py install
+LD_PRELOAD= $PYTHON setup.py build_ext -c mingw32
+LD_PRELOAD= $PYTHON setup.py install
 cd ..
 
 
@@ -111,23 +110,34 @@ LD_PRELOAD= wine msiexec /qn /i Twisted-13.2.0.win32-py2.7.msi
 
 
 # install zope.interface
-LD_PRELOAD= $INSTEI zope.interface
+wget https://pypi.python.org/packages/source/z/zope.interface/zope.interface-4.1.0.tar.gz
+tar xvf zope.interface-4.1.0.tar.gz
+cd zope.interface-*
+LD_PRELOAD= $PYTHON setup.py build -c mingw32
+LD_PRELOAD= $PYTHON setup.py install
+cd ..
 
 
 # install obfsproxy
-LD_PRELOAD= $INSTEI obfsproxy
+wget https://pypi.python.org/packages/source/o/obfsproxy/obfsproxy-0.2.7.tar.gz
+tar xvf obfsproxy-0.2.7.tar.gz
+cd obfsproxy-*
+LD_PRELOAD= $PYTHON setup.py build -c mingw32
+LD_PRELOAD= $PYTHON setup.py install
+cd ..
 
 
 # install pytptlib
-LD_PRELOAD= $INSTEI pyptlib
-
-
-# see: https://github.com/kpdyer/fteproxy/issues/66
-#touch /usr/local/lib/python2.7/dist-packages/zope/__init__.py
+wget https://pypi.python.org/packages/source/p/pyptlib/pyptlib-0.0.5.tar.gz
+tar xvf pyptlib-0.0.5.tar.gz
+cd pyptlib-*
+LD_PRELOAD= $PYTHON setup.py build -c mingw32
+LD_PRELOAD= $PYTHON setup.py install
+cd ..
 
 
 # buildfteproxy
 git clone https://github.com/kpdyer/fteproxy.git
 cd fteproxy
-ln -s $INSTDIR/gmp thirdparty/gmp
-LD_PRELOAD= PYTHON=$INSTPYTHON make dist-windows-i386
+cp $INSTDIR/gmp/bin/*.dll .
+LD_PRELOAD= make dist-windows-i386
