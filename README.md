@@ -31,3 +31,9 @@ Requirements
     * ```ubuntu-12.10-i386``` - used to cross-compile for darwin and windows platforms
     * ```debian-7.1.0-i386``` - used to produce 32-bit linux binaries
     * ```debian-7.1.0-amd64``` - used to produce 64-bit linux binaries
+
+
+Author
+------
+
+Please contact Kevin P. Dyer (kdyer@cs.pdx.edu) if you have any questions.
