@@ -17,6 +17,8 @@
 
 # Tested on Debian 7.1.0, Ubuntu 12.04/12.10/13.04/13.10:
 
+mkdir sandbox
+cd sandbox
 git clone https://github.com/kpdyer/fteproxy.git
 cd fteproxy
 make dist
