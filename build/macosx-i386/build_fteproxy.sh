@@ -36,18 +36,22 @@ export LDFLAGS="-L/usr/lib/apple/SDKs/MacOSX10.6.sdk/usr/lib/ -L/usr/lib/apple/S
 
 mkdir -p $WORKING_DIR
 mkdir -p $INSTDIR
-cd $WORKING_DIR
 
+sudo apt-get install faketime
+sudo apt-get install python-dev
+
+cd $WORKING_DIR
 wget http://packages.siedler25.org/pool/main/a/apple-uni-sdk-10.6/apple-uni-sdk-10.6_20110407-0.flosoft1_i386.deb
 sudo dpkg -i apple-uni-sdk-10.6_20110407-0.flosoft1_i386.deb
 
+cd $WORKING_DIR
 wget https://mingw-and-ndk.googlecode.com/files/multiarch-darwin11-cctools127.2-gcc42-5666.3-llvmgcc42-2336.1-Linux-120724.tar.xz
 cd /usr
-sudo tar -Jxvf /home/ubuntu/build/multiarch-darwin*tar.xz
-cd $WORKDING_DIR
+sudo tar -Jxvf $WORKING_DIR/multiarch-darwin*tar.xz
 
+cd $WORKING_DIR
 # For OpenSSL
-  sudo ln -s /usr/apple-osx/bin/apple-osx-gcc /usr/apple-osx/bin/i686-apple-darwin11-cc
+sudo ln -s /usr/apple-osx/bin/apple-osx-gcc /usr/apple-osx/bin/i686-apple-darwin11-cc
 
 # install gmp
 wget https://ftp.gnu.org/gnu/gmp/gmp-5.1.3.tar.bz2
@@ -59,14 +63,21 @@ make install
 cd ..
 
 
+# install setuptools
+wget https://pypi.python.org/packages/source/s/setuptools/setuptools-3.3.tar.gz
+tar xvf setuptools-3.3.tar.gz
+cd setuptools-*
+python setup.py install
+cd ..
+
+
 # install pycrypto
 wget https://ftp.dlitz.net/pub/dlitz/crypto/pycrypto/pycrypto-2.6.1.tar.gz
 tar xvf pycrypto-2.6.1.tar.gz
 cd pycrypto-*
 # This is bogus, that we run the configure script in the build environment, but it seems to work.
 # https://bugs.launchpad.net/pycrypto/+bug/1096207 for ac_cv_func_malloc_0_nonnull.
-ac_cv_func_malloc_0_nonnull=yes sh configure --host=i686-w64-mingw32
-python setup.py build_ext -c mingw32
+#ac_cv_func_malloc_0_nonnull=yes sh configure --host=i686-apple-darwin11
 python setup.py install
 cd ..
 
@@ -75,7 +86,6 @@ cd ..
 wget https://pypi.python.org/packages/source/T/Twisted/Twisted-13.2.0.tar.bz2
 tar xvf Twisted-13.2.0.tar.bz2
 cd Twisted-*
-python setup.py build -c mingw32
 python setup.py install
 cd ..
 
@@ -84,7 +94,6 @@ cd ..
 wget https://pypi.python.org/packages/source/z/zope.interface/zope.interface-4.1.0.tar.gz
 tar xvf zope.interface-4.1.0.tar.gz
 cd zope.interface-*
-python setup.py build -c mingw32
 python setup.py install
 cd ..
 
@@ -93,7 +102,6 @@ cd ..
 wget https://pypi.python.org/packages/source/o/obfsproxy/obfsproxy-0.2.7.tar.gz
 tar xvf obfsproxy-0.2.7.tar.gz
 cd obfsproxy-*
-python setup.py build -c mingw32
 python setup.py install
 cd ..
 
@@ -102,7 +110,6 @@ cd ..
 wget https://pypi.python.org/packages/source/p/pyptlib/pyptlib-0.0.5.tar.gz
 tar xvf pyptlib-0.0.5.tar.gz
 cd pyptlib-*
-python setup.py build -c mingw32
 python setup.py install
 cd ..
 
@@ -110,4 +117,4 @@ cd ..
 # buildfteproxy
 git clone https://github.com/kpdyer/fteproxy.git
 cd fteproxy
-make dist-windows-i386
+make dist-osx-i386

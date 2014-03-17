@@ -100,7 +100,7 @@ cd pycrypto-*
 # https://bugs.launchpad.net/pycrypto/+bug/1096207 for ac_cv_func_malloc_0_nonnull.
 ac_cv_func_malloc_0_nonnull=yes sh configure --host=i686-w64-mingw32
 LD_PRELOAD= $PYTHON setup.py build_ext -c mingw32
-LD_PRELOAD= $PYTHON setup.py install
+LD_PRELOAD= $PYTHON setup.py install_lib
 cd ..
 
 
@@ -114,7 +114,7 @@ wget https://pypi.python.org/packages/source/z/zope.interface/zope.interface-4.1
 tar xvf zope.interface-4.1.0.tar.gz
 cd zope.interface-*
 LD_PRELOAD= $PYTHON setup.py build -c mingw32
-LD_PRELOAD= $PYTHON setup.py install
+LD_PRELOAD= $PYTHON setup.py install_lib
 cd ..
 
 
@@ -123,7 +123,7 @@ wget https://pypi.python.org/packages/source/o/obfsproxy/obfsproxy-0.2.7.tar.gz
 tar xvf obfsproxy-0.2.7.tar.gz
 cd obfsproxy-*
 LD_PRELOAD= $PYTHON setup.py build -c mingw32
-LD_PRELOAD= $PYTHON setup.py install
+LD_PRELOAD= $PYTHON setup.py install_lib
 cd ..
 
 
@@ -132,7 +132,7 @@ wget https://pypi.python.org/packages/source/p/pyptlib/pyptlib-0.0.5.tar.gz
 tar xvf pyptlib-0.0.5.tar.gz
 cd pyptlib-*
 LD_PRELOAD= $PYTHON setup.py build -c mingw32
-LD_PRELOAD= $PYTHON setup.py install
+LD_PRELOAD= $PYTHON setup.py install_lib
 cd ..
 
 
