@@ -27,6 +27,7 @@ dist/fteproxy-windows-i386.zip
 Requirements
 ------------
 
+* OSX 10.9
 * Vagrant: http://www.vagrantup.com/
 * VirtualBox: https://www.virtualbox.org
 * Three vagrants boxes:
