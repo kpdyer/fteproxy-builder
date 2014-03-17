@@ -139,5 +139,6 @@ cd ..
 # buildfteproxy
 git clone https://github.com/kpdyer/fteproxy.git
 cd fteproxy
+ln -s $INSTDIR/gmp thirdparty/gmp
 cp $INSTDIR/gmp/bin/*.dll .
 LD_PRELOAD= make dist-windows-i386
