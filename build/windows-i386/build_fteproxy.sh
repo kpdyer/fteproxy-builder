@@ -17,44 +17,48 @@
 
 # Tested on Debian 7.1.0, Ubuntu 12.04/12.10/13.04/13.10:
 
-WORKING_DIR=/vagrant/sandbox
-INSTDIR=/vagrant/sandbox/opt
-WINEROOT=$HOME/.wine/drive_c
+export WORKING_DIR=/vagrant/sandbox
+export INSTDIR=$WORKING_DIR/opt
+export LD_PRELOAD=/usr/lib/faketime/libfaketime.so.1
+export FAKETIME=$REFERENCE_DATETIME
+export TZ=UTC
+export LC_ALL=C
+export CFLAGS="-mwindows"
+export LDFLAGS="-mwindows"
 
 mkdir -p $WORKING_DIR
 mkdir -p $INSTDIR
 cd $WORKING_DIR
 
+sudo locale-gen en_US en_US.UTF-8
+sudo dpkg-reconfigure locales
+
 # depdendencies
 sudo apt-get update
-sudo apt-get -y upgrade
+sudo apt-get -y --no-install-recommends upgrade
 
-sudo apt-get -y install build-essential
-sudo apt-get -y install upx
-sudo apt-get -y install m4
-sudo apt-get -y install git
-sudo apt-get -y install python-pip
-sudo apt-get -y install g++-mingw-w64
-sudo apt-get -y install mingw-w64
-sudo apt-get -y install wine
-sudo apt-get -y install unzip
-sudo apt-get -y install faketime
-sudo apt-get -y install p7zip-full
+sudo apt-get -y --no-install-recommends install build-essential
+sudo apt-get -y --no-install-recommends install upx
+sudo apt-get -y --no-install-recommends install m4
+sudo apt-get -y --no-install-recommends install git
+sudo apt-get -y --no-install-recommends install python-pip
+sudo apt-get -y --no-install-recommends install g++-mingw-w64
+sudo apt-get -y --no-install-recommends install mingw-w64
+sudo apt-get -y --no-install-recommends install unzip
+sudo apt-get -y --no-install-recommends install faketime
+sudo apt-get -y --no-install-recommends install p7zip-full
+
+sudo add-apt-repository -y ppa:ubuntu-wine/ppa
+sudo apt-get update
+sudo apt-get -y --no-install-recommends install wine
 
 
 # install python
-#wget http://downloads.activestate.com/ActivePython/releases/2.7.5.6/ActivePython-2.7.5.6-win32-x86.msi
 LD_PRELOAD= wineboot -i
 wget https://www.python.org/ftp/python/2.7.6/python-2.7.6.msi
-LD_PRELOAD= wine msiexec /qn /i python-2.7.6.msi TARGETDIR=$INSTDIR/python
-INSTPYTHON="wine $INSTDIR/python/python.exe"
-INSTEI="wine easy_install"
-
-
-# install pip
-#wget https://raw.github.com/pypa/pip/master/contrib/get-pip.py
-#LD_PRELOAD= $INSTPYTHON get-pip.py
-#INSTPIP="wine pip"
+LD_PRELOAD= wine msiexec /qn /i python-2.7.6.msi
+export INSTPYTHON="wine C:\\Python27\\python.exe"
+export INSTEI="wine C:\\Python27\\Scripts\\easy_install.exe"
 
 
 # install py2exe
@@ -64,11 +68,19 @@ cp -a PLATLIB/* /home/vagrant/.wine/drive_c/Python27/Lib/site-packages/
 
 
 # install wrappers, to expose mingw compilers to wine
+export WINEROOT=$HOME/.wine/drive_c
 cp -rfv ../wine-wrappers .
 cd wine-wrappers
-cp /home/vagrant/.wine/drive_c/windows/system32/python27.dll build/bdist.win32/winexe/bundle-2.7/
-$INSTPYTHON setup.py py2exe
+mkdir -p build/bdist.win32/winexe/bundle-2.7
+cp -a C:\\Python27\\python27.dll build/bdist.win32/winexe/bundle-2.7/
+LD_PRELOAD= $INSTPYTHON setup.py py2exe
 cp -a dist/gcc.exe dist/g++.exe dist/dllwrap.exe dist/swig.exe $WINEROOT/windows/
+cd ..
+
+
+# install pip
+wget https://raw.github.com/pypa/pip/master/contrib/get-pip.py
+LD_PRELOAD= $INSTPYTHON get-pip.py
 
 
 # install gmp
@@ -83,6 +95,7 @@ cd ..
 
 # install pycrypto
 wget https://ftp.dlitz.net/pub/dlitz/crypto/pycrypto/pycrypto-2.6.1.tar.gz
+tar xvf pycrypto-2.6.1.tar.gz
 cd pycrypto-*
 # This is bogus, that we run the configure script in the build environment, but it seems to work.
 # https://bugs.launchpad.net/pycrypto/+bug/1096207 for ac_cv_func_malloc_0_nonnull.
@@ -98,15 +111,15 @@ LD_PRELOAD= wine msiexec /qn /i Twisted-13.2.0.win32-py2.7.msi
 
 
 # install zope.interface
-$INSTEI zope.interface
+LD_PRELOAD= $INSTEI zope.interface
 
 
 # install obfsproxy
-$INSTEI obfsproxy
+LD_PRELOAD= $INSTEI obfsproxy
 
 
 # install pytptlib
-$INSTEI pyptlib
+LD_PRELOAD= $INSTEI pyptlib
 
 
 # see: https://github.com/kpdyer/fteproxy/issues/66
@@ -116,5 +129,5 @@ $INSTEI pyptlib
 # buildfteproxy
 git clone https://github.com/kpdyer/fteproxy.git
 cd fteproxy
-ln -s /vagrant/gmp thirdparty/gmp
-LD_PRELOAD= CFLAGS="-I/vagrant/gmp/include" PYTHON=$INSTPYTHON make dist-windows-i386
+ln -s $INSTDIR/gmp thirdparty/gmp
+LD_PRELOAD= PYTHON=$INSTPYTHON make dist-windows-i386
