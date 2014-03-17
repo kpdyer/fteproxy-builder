@@ -12,7 +12,7 @@ This project's purpose is to streamline the process of building fteproxy for 32-
 ```
 $ git clone https://github.com/kpdyer/fteproxy-builder.git
 $ cd fteproxy-builder
-$ make dist-all
+$ make all
 [wait a bit]
 $ ls dist/*
 dist/fteproxy-darwin-i386.tar.gz
