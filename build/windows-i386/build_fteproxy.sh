@@ -41,6 +41,7 @@ sudo apt-get -y --no-install-recommends install build-essential
 sudo apt-get -y --no-install-recommends install upx
 sudo apt-get -y --no-install-recommends install m4
 sudo apt-get -y --no-install-recommends install git
+sudo apt-get -y --no-install-recommends install zip
 sudo apt-get -y --no-install-recommends install python-pip
 sudo apt-get -y --no-install-recommends install g++-mingw-w64
 sudo apt-get -y --no-install-recommends install mingw-w64
@@ -141,4 +142,7 @@ git clone https://github.com/kpdyer/fteproxy.git
 cd fteproxy
 ln -s $INSTDIR/gmp thirdparty/gmp
 cp $INSTDIR/gmp/bin/*.dll .
+mkdir dist
+cp /home/vagrant/.wine/drive_c/Python27/python27.dll dist/
+cp $INSTDIR/gmp/bin/*.dll dist/
 LD_PRELOAD= make dist-windows-i386
