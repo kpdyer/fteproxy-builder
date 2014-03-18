@@ -35,11 +35,12 @@ sudo dpkg-reconfigure locales
 
 # depdendencies
 sudo apt-get update
+sudo update-ca-certificates
 
 sudo apt-get -y install build-essential
 sudo apt-get -y install upx
 sudo apt-get -y install m4
-sudo apt-get -y install git
+sudo apt-get -y install git-core
 sudo apt-get -y install zip
 sudo apt-get -y install python-pip
 sudo apt-get -y install g++-mingw-w64
