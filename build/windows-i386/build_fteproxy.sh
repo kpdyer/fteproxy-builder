@@ -36,21 +36,21 @@ sudo dpkg-reconfigure locales
 # depdendencies
 sudo apt-get update
 
-sudo apt-get -y --no-install-recommends install build-essential
-sudo apt-get -y --no-install-recommends install upx
-sudo apt-get -y --no-install-recommends install m4
-sudo apt-get -y --no-install-recommends install git
-sudo apt-get -y --no-install-recommends install zip
-sudo apt-get -y --no-install-recommends install python-pip
-sudo apt-get -y --no-install-recommends install g++-mingw-w64
-sudo apt-get -y --no-install-recommends install mingw-w64
-sudo apt-get -y --no-install-recommends install unzip
-sudo apt-get -y --no-install-recommends install faketime
-sudo apt-get -y --no-install-recommends install p7zip-full
+sudo apt-get -y install build-essential
+sudo apt-get -y install upx
+sudo apt-get -y install m4
+sudo apt-get -y install git
+sudo apt-get -y install zip
+sudo apt-get -y install python-pip
+sudo apt-get -y install g++-mingw-w64
+sudo apt-get -y install mingw-w64
+sudo apt-get -y install unzip
+sudo apt-get -y install faketime
+sudo apt-get -y install p7zip-full
 
 sudo add-apt-repository -y ppa:ubuntu-wine/ppa
 sudo apt-get update
-sudo apt-get -y --no-install-recommends install wine
+sudo apt-get -y install wine
 
 
 # install python
@@ -86,7 +86,7 @@ LD_PRELOAD= $PYTHON get-pip.py
 wget https://ftp.gnu.org/gnu/gmp/gmp-5.1.3.tar.bz2
 tar xvf gmp-5.1.3.tar.bz2
 cd gmp-*
-./configure --prefix=$INSTDIR/gmp --host=i686-w64-mingw32 --enable-cxx --disable-static --enable-shared
+./configure --prefix=$INSTDIR/gmp --build=i686-gnu-linux --host=i686-w64-mingw32 --enable-cxx --disable-static --enable-shared
 make
 make install
 cd ..
@@ -138,11 +138,7 @@ cd ..
 
 # buildfteproxy
 cd $WORKING_DIR
-#git clone https://github.com/kpdyer/fteproxy.git
-wget https://github.com/kpdyer/fteproxy/archive/master.zip
-unzip master
-mv fteproxy-master fteproxy
-#
+git clone https://github.com/kpdyer/fteproxy.git
 cd fteproxy
 ln -s $INSTDIR/gmp thirdparty/gmp
 cp $INSTDIR/gmp/bin/*.dll .

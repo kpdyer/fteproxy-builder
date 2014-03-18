@@ -50,7 +50,6 @@ dist/fteproxy-$(FTEPROXY_VER)-darwin-i386.tar.gz:
 dist/fteproxy-$(FTEPROXY_VER)-windows-i386.zip:
 	@cd $(BUILD_DIR_ABSPATH)/windows-i386; \
 	vagrant up; \
-	vagrant provision; \
 	cp sandbox/fteproxy/dist/*.zip $(ARTIFACT_DIR_ABSPATH)/
 
 clean:
