@@ -24,12 +24,13 @@ cd $WORKING_DIR
 
 # depdendencies
 sudo apt-get update
-sudo apt-get -y --no-install-recommends upgrade
 
 sudo apt-get -y --no-install-recommends install build-essential
 sudo apt-get -y --no-install-recommends install upx
 sudo apt-get -y --no-install-recommends install git
+sudo apt-get -y --no-install-recommends install libgmp-dev
 sudo apt-get -y --no-install-recommends install python-pip
+sudo apt-get -y --no-install-recommends install python-dev
 
 sudo pip install --upgrade pip
 sudo pip install --upgrade setuptools

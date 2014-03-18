@@ -24,7 +24,6 @@ cd $WORKING_DIR
 
 # depdendencies
 sudo apt-get update
-sudo apt-get -y --no-install-recommends upgrade
 
 sudo apt-get -y --no-install-recommends install build-essential
 sudo apt-get -y --no-install-recommends install upx

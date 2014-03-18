@@ -1,9 +1,9 @@
 fteproxy-builder
 ================
 
-This is a helper-project, which builds fteproxy for all of its target platforms.
+This is a collection of scripts that build fteproxy for all of its target platforms.
 
-fteproxy-builder requires OSX, and has been tested on OSX 10.9.
+The initial release of fteproxy-builder requires OSX, and has been tested on OSX 10.9.
 
 
 Overview
@@ -17,11 +17,11 @@ $ cd fteproxy-builder
 $ make all
 [wait a bit]
 $ ls dist/*
-dist/fteproxy-master-src.tar.gz
-dist/fteproxy-darwin-i386.tar.gz
-dist/fteproxy-linux-i386.tar.gz
-dist/fteproxy-linux-x86_64.tar.gz
-dist/fteproxy-windows-i386.zip
+dist/fteproxy-X.Y.Z-darwin-i386.tar.gz
+dist/fteproxy-X.Y.Z-linux-i386.tar.gz
+dist/fteproxy-X.Y.Z-linux-x86_64.tar.gz
+dist/fteproxy-X.Y.Z-src.tar.gz
+dist/fteproxy-X.Y.Z-windows-i386.zip
 ```
 
 
@@ -37,8 +37,6 @@ For details on how to setup your environment, please see ```INSTALL```. In addit
     * ```ubuntu-12.04-i386``` - used to cross-compile for windows platform
     * ```debian-7.1.0-i386``` - used to produce 32-bit linux binaries
     * ```debian-7.1.0-amd64``` - used to produce 64-bit linux binaries
-
-Vagrant boxes can be obtained from: http://www.vagrantbox.es/
 
 
 Author

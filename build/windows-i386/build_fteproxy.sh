@@ -35,7 +35,6 @@ sudo dpkg-reconfigure locales
 
 # depdendencies
 sudo apt-get update
-sudo apt-get -y --no-install-recommends upgrade
 
 sudo apt-get -y --no-install-recommends install build-essential
 sudo apt-get -y --no-install-recommends install upx
@@ -138,7 +137,12 @@ cd ..
 
 
 # buildfteproxy
-git clone https://github.com/kpdyer/fteproxy.git
+cd $WORKING_DIR
+#git clone https://github.com/kpdyer/fteproxy.git
+wget https://github.com/kpdyer/fteproxy/archive/master.zip
+unzip master
+mv fteproxy-master fteproxy
+#
 cd fteproxy
 ln -s $INSTDIR/gmp thirdparty/gmp
 cp $INSTDIR/gmp/bin/*.dll .

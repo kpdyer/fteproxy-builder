@@ -17,6 +17,10 @@
 
 # Tested on Debian 7.1.0, Ubuntu 12.04/12.10/13.04/13.10:
 
+# temporary hack: http://stackoverflow.com/questions/20294408/cython-compilation-errors-mno-fused-madd
+export CFLAGS=-Qunused-arguments
+export CPPFLAGS=-Qunused-arguments
+
 mkdir sandbox
 cd sandbox
 git clone https://github.com/kpdyer/fteproxy.git
