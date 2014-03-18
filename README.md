@@ -31,7 +31,7 @@ Requirements
 
 For details on how to setup your environment, please see ```INSTALL```. In addition, the following four requirements must be met to do full builds for all target platforms.
 
-* OSX 10.9 as the host system
+* OSX 10.9.x
 * Vagrant: http://www.vagrantup.com/
 * VirtualBox: https://www.virtualbox.org
 * Three vagrants boxes:
