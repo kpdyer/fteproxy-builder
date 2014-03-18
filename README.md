@@ -24,6 +24,7 @@ dist/fteproxy-X.Y.Z-src.tar.gz
 dist/fteproxy-X.Y.Z-windows-i386.zip
 ```
 
+If you wish to build a specific version or tag of fteproxy, set ```FTEPROXY_TAG``` and/or ```FTEPROXY_VER``` in the Makefile.
 
 Requirements
 ------------
