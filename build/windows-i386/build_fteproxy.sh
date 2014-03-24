@@ -37,17 +37,17 @@ sudo dpkg-reconfigure locales
 sudo apt-get update
 sudo update-ca-certificates
 
-sudo apt-get -y install build-essential
-sudo apt-get -y install upx
-sudo apt-get -y install m4
-sudo apt-get -y install git-core
-sudo apt-get -y install zip
-sudo apt-get -y install python-pip
-sudo apt-get -y install g++-mingw-w64
-sudo apt-get -y install mingw-w64
-sudo apt-get -y install unzip
-sudo apt-get -y install faketime
-sudo apt-get -y install p7zip-full
+sudo apt-get -y --no-install-recommends install build-essential
+sudo apt-get -y --no-install-recommends install upx
+sudo apt-get -y --no-install-recommends install m4
+sudo apt-get -y --no-install-recommends install git-core
+sudo apt-get -y --no-install-recommends install zip
+sudo apt-get -y --no-install-recommends install python-pip
+sudo apt-get -y --no-install-recommends install g++-mingw-w64
+sudo apt-get -y --no-install-recommends install mingw-w64
+sudo apt-get -y --no-install-recommends install unzip
+sudo apt-get -y --no-install-recommends install faketime
+sudo apt-get -y --no-install-recommends install p7zip-full
 
 sudo add-apt-repository -y ppa:ubuntu-wine/ppa
 sudo apt-get update
