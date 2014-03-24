@@ -32,6 +32,7 @@ sudo apt-get -y --no-install-recommends install git-core
 sudo apt-get -y --no-install-recommends install python-dev
 sudo apt-get -y --no-install-recommends install libgmp-dev
 sudo apt-get -y --no-install-recommends install python-pip
+sudo apt-get -y --no-install-recommends install debhelper
 
 sudo pip install --upgrade pip
 sudo pip install --upgrade setuptools
