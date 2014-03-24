@@ -48,3 +48,4 @@ sudo touch /usr/local/lib/python2.7/dist-packages/zope/__init__.py
 git clone https://github.com/kpdyer/fteproxy.git
 cd fteproxy
 make dist-linux-x86_64
+make dist-deb
