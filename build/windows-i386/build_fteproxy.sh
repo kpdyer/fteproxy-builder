@@ -51,7 +51,7 @@ sudo apt-get -y --no-install-recommends install p7zip-full
 
 sudo add-apt-repository -y ppa:ubuntu-wine/ppa
 sudo apt-get update
-sudo apt-get -y install wine
+sudo apt-get -y --no-install-recommends install wine
 
 
 # install python
