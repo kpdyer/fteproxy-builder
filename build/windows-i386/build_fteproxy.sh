@@ -147,3 +147,4 @@ mkdir dist
 cp /home/vagrant/.wine/drive_c/Python27/python27.dll dist/
 cp $INSTDIR/gmp/bin/*.dll dist/
 LD_PRELOAD= make dist-windows-i386
+LD_PRELOAD= make test

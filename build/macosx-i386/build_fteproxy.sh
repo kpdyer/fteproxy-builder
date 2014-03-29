@@ -26,3 +26,4 @@ cd sandbox
 git clone https://github.com/kpdyer/fteproxy.git
 cd fteproxy
 make dist
+make test
