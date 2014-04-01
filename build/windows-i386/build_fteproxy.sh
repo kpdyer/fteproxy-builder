@@ -35,8 +35,6 @@ sudo dpkg-reconfigure locales
 
 # depdendencies
 sudo apt-get update
-sudo apt-get -y upgrade
-sudo update-ca-certificates
 
 sudo apt-get -y --no-install-recommends install build-essential
 sudo apt-get -y --no-install-recommends install upx
@@ -140,7 +138,7 @@ cd ..
 
 # buildfteproxy
 cd $WORKING_DIR
-git clone https://github.com/kpdyer/fteproxy.git
+LD_PRELOAD= git clone https://github.com/kpdyer/fteproxy.git
 cd fteproxy
 ln -s $INSTDIR/gmp thirdparty/gmp
 cp $INSTDIR/gmp/bin/*.dll .
@@ -148,4 +146,4 @@ mkdir dist
 cp /home/vagrant/.wine/drive_c/Python27/python27.dll dist/
 cp $INSTDIR/gmp/bin/*.dll dist/
 LD_PRELOAD= make dist-windows-i386
-LD_PRELOAD= make test
+LD_PRELOAD= $PYTHON ./bin/fteproxy --mode test
