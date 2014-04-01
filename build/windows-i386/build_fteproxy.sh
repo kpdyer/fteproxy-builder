@@ -35,6 +35,7 @@ sudo dpkg-reconfigure locales
 
 # depdendencies
 sudo apt-get update
+sudo apt-get -y upgrade
 sudo update-ca-certificates
 
 sudo apt-get -y --no-install-recommends install build-essential
