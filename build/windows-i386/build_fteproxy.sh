@@ -141,9 +141,8 @@ cd $WORKING_DIR
 LD_PRELOAD= git clone https://github.com/kpdyer/fteproxy.git
 cd fteproxy
 ln -s $INSTDIR/gmp thirdparty/gmp
-cp $INSTDIR/gmp/bin/*.dll .
+cp -a thirdparty/gmp/bin/*.dll .
+cp -a /home/vagrant/.wine/drive_c/Python27/python27.dll .
 mkdir dist
-cp $INSTDIR/gmp/bin/*.dll dist/
-cp -a /home/vagrant/.wine/drive_c/Python27/python27.dll dist/
 LD_PRELOAD= make dist-windows-i386
 LD_PRELOAD= $PYTHON ./bin/fteproxy --mode test
