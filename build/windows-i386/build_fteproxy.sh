@@ -22,7 +22,6 @@ export INSTDIR=$WORKING_DIR/opt
 export CFLAGS="-mwindows"
 export LDFLAGS="-mwindows"
 export PYTHON="wine /home/vagrant/.wine/drive_c/Python27/python.exe"
-export PIP="wine /home/vagrant/.wine/drive_c/Python27/Scripts/pip.exe"
 
 mkdir -p $WORKING_DIR
 mkdir -p $INSTDIR
@@ -55,11 +54,18 @@ wget https://pypi.python.org/packages/source/s/setuptools/setuptools-3.4.1.tar.g
 tar zxvf setuptools-3.4.1.tar.gz
 cd setuptools-*
 $PYTHON setup.py build_ext -c mingw32
-$PYTHON setup.py install
+$PYTHON setup.py install_lib
 cd ..
 
 
 # install py2exe
+wget http://tcpdiag.dl.sourceforge.net/project/py2exe/py2exe/0.6.9/py2exe-0.6.9.zip
+unzip py2exe-0.6.9.zip
+cd py2exe-*
+$PYTHON setup.py build_ext -c mingw32
+$PYTHON setup.py install_lib
+cd ..
+
 wget http://softlayer-ams.dl.sourceforge.net/project/py2exe/py2exe/0.6.9/py2exe-0.6.9.win32-py2.7.exe
 7z x py2exe-0.6.9.win32-py2.7.exe
 cp -a PLATLIB/* /home/vagrant/.wine/drive_c/Python27/Lib/site-packages/
@@ -94,20 +100,28 @@ cd pycrypto-*
 # https://bugs.launchpad.net/pycrypto/+bug/1096207 for ac_cv_func_malloc_0_nonnull.
 CPPFLAGS="-L$INSTDIR/gmp/bin -I$INSTDIR/gmp/include" ac_cv_func_malloc_0_nonnull=yes sh configure --host=i686-w64-mingw32
 $PYTHON setup.py build_ext -c mingw32
-$PYTHON setup.py install
+$PYTHON setup.py install_lib
 cd ..
 
 
 # install zope.interface
-wget https://pypi.python.org/packages/2.7/z/zope.interface/zope.interface-4.1.1.win32-py2.7.exe
-7z x zope.interface-4.1.1.win32-py2.7.exe
-cp -a PLATLIB/* /home/vagrant/.wine/drive_c/Python27/Lib/site-packages/
+wget https://pypi.python.org/packages/source/z/zope.interface/zope.interface-4.1.1.tar.gz
+tar xvf zope.interface-4.1.1.tar.gz
+cd zope.interface-*
+$PYTHON setup.py build_ext -c mingw32
+$PYTHON setup.py install_lib
+cd ..
 touch /home/vagrant/.wine/drive_c/Python27/Lib/site-packages/zope/__init__.py
 
 
 # install twisted
-wget https://pypi.python.org/packages/2.7/T/Twisted/Twisted-13.2.0.win32-py2.7.msi
-wine msiexec /qn /i Twisted-13.2.0.win32-py2.7.msi
+sudo ln -s /home/vagrant/.wine/drive_c/Python27/include/Python.h /home/vagrant/.wine/drive_c/Python27/include/python.h
+wget https://pypi.python.org/packages/source/T/Twisted/Twisted-13.2.0.tar.bz2
+tar xvf Twisted-13.2.0.tar.bz2
+cd Twisted-*
+echo $'[build_ext]\ncompiler=mingw32' > setup.cfg
+$PYTHON setup.py install_lib
+cd ..
 
 
 # install obfsproxy
