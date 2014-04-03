@@ -114,7 +114,7 @@ wget https://pypi.python.org/packages/source/o/obfsproxy/obfsproxy-0.2.7.tar.gz
 tar xvf obfsproxy-0.2.7.tar.gz
 cd obfsproxy-*
 $PYTHON setup.py build_ext -c mingw32
-$PYTHON setup.py install
+$PYTHON setup.py install_lib
 cd ..
 
 
@@ -123,7 +123,7 @@ wget https://pypi.python.org/packages/source/p/pyptlib/pyptlib-0.0.5.tar.gz
 tar xvf pyptlib-0.0.5.tar.gz
 cd pyptlib-*
 $PYTHON setup.py build_ext -c mingw32
-$PYTHON setup.py install
+$PYTHON setup.py install_lib
 cd ..
 
 
