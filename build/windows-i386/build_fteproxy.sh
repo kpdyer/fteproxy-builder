@@ -54,6 +54,21 @@ wine msiexec /qn /i python-2.7.6.msi
 export PYTHON="wine /home/vagrant/.wine/drive_c/Python27/python.exe"
 
 
+# setuptools
+wget https://pypi.python.org/packages/source/s/setuptools/setuptools-3.4.1.tar.gz
+tar zxvf setuptools-3.4.1.tar.gz
+cd setuptools-*
+$PYTHON setup.py build_ext -c mingw32
+$PYTHON setup.py install_lib
+cd ..
+
+
+# install py2exe
+wget http://softlayer-ams.dl.sourceforge.net/project/py2exe/py2exe/0.6.9/py2exe-0.6.9.win32-py2.7.exe
+7z x py2exe-0.6.9.win32-py2.7.exe
+cp -a PLATLIB/* /home/vagrant/.wine/drive_c/Python27/Lib/site-packages/
+
+
 # install wrappers, to expose mingw compilers to wine
 export WINEROOT=$HOME/.wine/drive_c
 cp -rfv ../wine-wrappers .
@@ -63,12 +78,6 @@ cp -a /home/vagrant/.wine/drive_c/Python27/python27.dll build/bdist.win32/winexe
 $PYTHON setup.py py2exe
 cp -a dist/gcc.exe dist/g++.exe dist/dllwrap.exe dist/swig.exe $WINEROOT/windows/
 cd ..
-
-
-# install py2exe
-wget http://softlayer-ams.dl.sourceforge.net/project/py2exe/py2exe/0.6.9/py2exe-0.6.9.win32-py2.7.exe
-7z x py2exe-0.6.9.win32-py2.7.exe
-cp -a PLATLIB/* /home/vagrant/.wine/drive_c/Python27/Lib/site-packages/
 
 
 # install gmp
