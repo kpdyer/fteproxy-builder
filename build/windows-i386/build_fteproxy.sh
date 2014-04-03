@@ -45,7 +45,6 @@ sudo apt-get -y --no-install-recommends install g++-mingw-w64
 sudo apt-get -y --no-install-recommends install mingw-w64
 sudo apt-get -y --no-install-recommends install unzip
 sudo apt-get -y --no-install-recommends install faketime
-sudo apt-get -y --no-install-recommends install p7zip-full
 
 sudo add-apt-repository -y ppa:ubuntu-wine/ppa
 sudo apt-get update
@@ -59,12 +58,6 @@ LD_PRELOAD= wine msiexec /qn /i python-2.7.6.msi
 export PYTHON="wine /home/vagrant/.wine/drive_c/Python27/python.exe"
 
 
-# install py2exe
-wget http://softlayer-ams.dl.sourceforge.net/project/py2exe/py2exe/0.6.9/py2exe-0.6.9.win32-py2.7.exe
-7z x py2exe-0.6.9.win32-py2.7.exe
-cp -a PLATLIB/* /home/vagrant/.wine/drive_c/Python27/Lib/site-packages/
-
-
 # install wrappers, to expose mingw compilers to wine
 export WINEROOT=$HOME/.wine/drive_c
 cp -rfv ../wine-wrappers .
@@ -74,6 +67,12 @@ cp -a /home/vagrant/.wine/drive_c/Python27/python27.dll build/bdist.win32/winexe
 LD_PRELOAD= $PYTHON setup.py py2exe
 cp -a dist/gcc.exe dist/g++.exe dist/dllwrap.exe dist/swig.exe $WINEROOT/windows/
 cd ..
+
+
+# install py2exe
+wget http://softlayer-ams.dl.sourceforge.net/project/py2exe/py2exe/0.6.9/py2exe-0.6.9.win32-py2.7.exe
+7z x py2exe-0.6.9.win32-py2.7.exe
+cp -a PLATLIB/* /home/vagrant/.wine/drive_c/Python27/Lib/site-packages/
 
 
 # install gmp
@@ -108,12 +107,8 @@ cd ..
 
 
 # install twisted
-wget http://twistedmatrix.com/Releases/Twisted/13.2/Twisted-13.2.0.tar.bz2
-tar xvf Twisted-13.2.0.tar.bz2
-cd Twisted-*
-LD_PRELOAD= $PYTHON setup.py build -c mingw32
-LD_PRELOAD= $PYTHON setup.py install_lib
-cd ..
+wget https://pypi.python.org/packages/2.7/T/Twisted/Twisted-13.2.0.win32-py2.7.msi
+LD_PRELOAD= wine msiexec /qn /i Twisted-13.2.0.win32-py2.7.msi
 
 
 # install obfsproxy
