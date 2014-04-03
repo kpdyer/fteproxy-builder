@@ -85,23 +85,13 @@ make install
 cd ..
 
 
-# openssl
-wget http://www.openssl.org/source/openssl-1.0.0l.tar.gz
-tar xvf openssl-1.0.0l.tar.gz
-cd openssl-*
-./Configure -shared --cross-compile-prefix=i686-w64-mingw32- mingw --prefix=$INSTDIR/openssl
-make
-make install
-cd ..
-
-
 # install pycrypto
 wget https://ftp.dlitz.net/pub/dlitz/crypto/pycrypto/pycrypto-2.6.1.tar.gz
 tar xvf pycrypto-2.6.1.tar.gz
 cd pycrypto-*
 # This is bogus, that we run the configure script in the build environment, but it seems to work.
 # https://bugs.launchpad.net/pycrypto/+bug/1096207 for ac_cv_func_malloc_0_nonnull.
-ac_cv_func_malloc_0_nonnull=yes sh configure --host=i686-w64-mingw32
+CPPFLAGS="-L$INSTDIR/gmp/bin -I$INSTDIR/gmp/include" ac_cv_func_malloc_0_nonnull=yes sh configure --host=i686-w64-mingw32
 $PYTHON setup.py build_ext -c mingw32
 $PYTHON setup.py install
 cd ..
