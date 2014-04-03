@@ -143,6 +143,8 @@ cd fteproxy
 ln -s $INSTDIR/gmp thirdparty/gmp
 cp -a thirdparty/gmp/bin/*.dll .
 cp -a /home/vagrant/.wine/drive_c/Python27/python27.dll .
+cp -a /usr/lib/gcc/i686-w64-mingw32/4.6/libstdc++-6.dll .
+cp -a /home/vagrant/.wine/drive_c/windows/system32/msvcr90.dll .
 mkdir dist
 LD_PRELOAD= make dist-windows-i386
 LD_PRELOAD= $PYTHON ./bin/fteproxy --mode test
