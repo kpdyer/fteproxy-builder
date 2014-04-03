@@ -32,7 +32,6 @@ sudo dpkg-reconfigure locales
 # depdendencies
 sudo apt-get update
 
-sudo apt-get -y --no-install-recommends install upx
 sudo apt-get -y --no-install-recommends install m4
 sudo apt-get -y --no-install-recommends install git
 sudo apt-get -y --no-install-recommends install zip
