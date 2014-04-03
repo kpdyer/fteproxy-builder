@@ -35,7 +35,7 @@ sudo apt-get update
 
 sudo apt-get -y --no-install-recommends install m4
 sudo apt-get -y --no-install-recommends install git
-sudo apt-get -y --no-install-recommends install zip unzip p7zip
+sudo apt-get -y --no-install-recommends install zip unzip p7zip-full
 sudo apt-get -y --no-install-recommends install g++-mingw-w64 mingw-w64
 
 sudo add-apt-repository -y ppa:ubuntu-wine/ppa
