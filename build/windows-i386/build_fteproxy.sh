@@ -22,6 +22,7 @@ export INSTDIR=$WORKING_DIR/opt
 export CFLAGS="-mwindows"
 export LDFLAGS="-mwindows"
 export PYTHON="wine /home/vagrant/.wine/drive_c/Python27/python.exe"
+export PIP="wine /home/vagrant/.wine/drive_c/Python27/Scripts/pip.exe"
 
 mkdir -p $WORKING_DIR
 mkdir -p $INSTDIR
@@ -134,5 +135,6 @@ cd fteproxy
 ln -s $INSTDIR/gmp thirdparty/gmp
 cp -a thirdparty/gmp/bin/*.dll .
 cp -a /home/vagrant/.wine/drive_c/Python27/python27.dll .
+cp -a /home/vagrant/.wine/drive_c/Python27/msvcr90.dll .
 make dist-windows-i386
 $PYTHON ./bin/fteproxy --mode test
