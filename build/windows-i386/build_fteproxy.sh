@@ -54,7 +54,7 @@ wget https://pypi.python.org/packages/source/s/setuptools/setuptools-3.4.1.tar.g
 tar zxvf setuptools-3.4.1.tar.gz
 cd setuptools-*
 $PYTHON setup.py build_ext -c mingw32
-$PYTHON setup.py install_lib
+$PYTHON setup.py install
 cd ..
 
 
@@ -92,9 +92,8 @@ cd pycrypto-*
 # This is bogus, that we run the configure script in the build environment, but it seems to work.
 # https://bugs.launchpad.net/pycrypto/+bug/1096207 for ac_cv_func_malloc_0_nonnull.
 ac_cv_func_malloc_0_nonnull=yes sh configure --host=i686-w64-mingw32 --with-gmp=$INSTDIR/gmp
-$PYTHON setup.py build -c mingw32
 $PYTHON setup.py build_ext -c mingw32
-$PYTHON setup.py install_lib
+$PYTHON setup.py install
 cd ..
 
 
@@ -114,9 +113,8 @@ wine msiexec /qn /i Twisted-13.2.0.win32-py2.7.msi
 wget https://pypi.python.org/packages/source/o/obfsproxy/obfsproxy-0.2.7.tar.gz
 tar xvf obfsproxy-0.2.7.tar.gz
 cd obfsproxy-*
-$PYTHON setup.py build -c mingw32
 $PYTHON setup.py build_ext -c mingw32
-$PYTHON setup.py install_lib
+$PYTHON setup.py install
 cd ..
 
 
@@ -124,9 +122,8 @@ cd ..
 wget https://pypi.python.org/packages/source/p/pyptlib/pyptlib-0.0.5.tar.gz
 tar xvf pyptlib-0.0.5.tar.gz
 cd pyptlib-*
-$PYTHON setup.py build -c mingw32
 $PYTHON setup.py build_ext -c mingw32
-$PYTHON setup.py install_lib
+$PYTHON setup.py install
 cd ..
 
 
