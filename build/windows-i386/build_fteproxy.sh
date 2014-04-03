@@ -40,7 +40,7 @@ sudo apt-get -y --no-install-recommends install g++-mingw-w64 mingw-w64
 
 sudo add-apt-repository -y ppa:ubuntu-wine/ppa
 sudo apt-get update
-sudo apt-get -y install wine
+sudo apt-get -y --no-install-recommends install wine
 
 
 # install python
@@ -99,12 +99,10 @@ cd ..
 
 
 # install zope.interface
-wget https://pypi.python.org/packages/source/z/zope.interface/zope.interface-3.6.7.zip
-unzip zope.interface-3.6.7.zip
-cd zope.interface-*
-$PYTHON setup.py build -c mingw32
-$PYTHON setup.py build_ext -c mingw32
-$PYTHON setup.py install_lib
+wget https://pypi.python.org/packages/2.7/z/zope.interface/zope.interface-3.6.7.win32-py2.7.exe
+7z x zope.interface-3.6.7.win32-py2.7.exe
+cp -a PLATLIB/* /home/vagrant/.wine/drive_c/Python27/Lib/site-packages/
+touch /home/vagrant/.wine/drive_c/Python27/Lib/site-packages/zope/__init__.py
 cd ..
 
 
