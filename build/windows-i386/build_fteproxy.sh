@@ -41,7 +41,6 @@ sudo apt-get -y --no-install-recommends install upx
 sudo apt-get -y --no-install-recommends install m4
 sudo apt-get -y --no-install-recommends install git
 sudo apt-get -y --no-install-recommends install zip
-sudo apt-get -y --no-install-recommends install python-pip
 sudo apt-get -y --no-install-recommends install g++-mingw-w64
 sudo apt-get -y --no-install-recommends install mingw-w64
 sudo apt-get -y --no-install-recommends install unzip
@@ -75,11 +74,6 @@ cp -a /home/vagrant/.wine/drive_c/Python27/python27.dll build/bdist.win32/winexe
 LD_PRELOAD= $PYTHON setup.py py2exe
 cp -a dist/gcc.exe dist/g++.exe dist/dllwrap.exe dist/swig.exe $WINEROOT/windows/
 cd ..
-
-
-# install pip
-wget https://raw.github.com/pypa/pip/master/contrib/get-pip.py
-LD_PRELOAD= $PYTHON get-pip.py
 
 
 # install gmp
