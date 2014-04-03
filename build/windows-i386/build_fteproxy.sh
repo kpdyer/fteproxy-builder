@@ -85,6 +85,16 @@ make install
 cd ..
 
 
+# openssl
+wget http://www.openssl.org/source/openssl-1.0.0l.tar.gz
+tar xvf openssl-1.0.0l.tar.gz
+cd openssl-*
+./Configure -shared --cross-compile-prefix=i686-w64-mingw32- mingw --prefix=$INSTDIR/openssl
+make
+make install
+cd ..
+
+
 # install pycrypto
 wget https://ftp.dlitz.net/pub/dlitz/crypto/pycrypto/pycrypto-2.6.1.tar.gz
 tar xvf pycrypto-2.6.1.tar.gz
