@@ -92,6 +92,7 @@ cd pycrypto-*
 # This is bogus, that we run the configure script in the build environment, but it seems to work.
 # https://bugs.launchpad.net/pycrypto/+bug/1096207 for ac_cv_func_malloc_0_nonnull.
 ac_cv_func_malloc_0_nonnull=yes sh configure --host=i686-w64-mingw32 --with-gmp=$INSTDIR/gmp
+$PYTHON setup.py build -c mingw32
 $PYTHON setup.py build_ext -c mingw32
 $PYTHON setup.py install_lib
 cd ..
@@ -102,6 +103,7 @@ wget https://pypi.python.org/packages/source/z/zope.interface/zope.interface-3.6
 unzip zope.interface-3.6.7.zip
 cd zope.interface-*
 $PYTHON setup.py build -c mingw32
+$PYTHON setup.py build_ext -c mingw32
 $PYTHON setup.py install_lib
 cd ..
 
@@ -116,6 +118,7 @@ wget https://pypi.python.org/packages/source/o/obfsproxy/obfsproxy-0.2.7.tar.gz
 tar xvf obfsproxy-0.2.7.tar.gz
 cd obfsproxy-*
 $PYTHON setup.py build -c mingw32
+$PYTHON setup.py build_ext -c mingw32
 $PYTHON setup.py install_lib
 cd ..
 
@@ -125,6 +128,7 @@ wget https://pypi.python.org/packages/source/p/pyptlib/pyptlib-0.0.5.tar.gz
 tar xvf pyptlib-0.0.5.tar.gz
 cd pyptlib-*
 $PYTHON setup.py build -c mingw32
+$PYTHON setup.py build_ext -c mingw32
 $PYTHON setup.py install_lib
 cd ..
 
