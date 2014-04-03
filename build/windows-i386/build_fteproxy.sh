@@ -19,8 +19,6 @@
 
 export WORKING_DIR=/vagrant/sandbox
 export INSTDIR=$WORKING_DIR/opt
-export TZ=UTC
-export LC_ALL=C
 export CFLAGS="-mwindows"
 export LDFLAGS="-mwindows"
 
