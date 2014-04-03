@@ -21,6 +21,7 @@ export WORKING_DIR=/vagrant/sandbox
 export INSTDIR=$WORKING_DIR/opt
 export CFLAGS="-mwindows"
 export LDFLAGS="-mwindows"
+export PYTHON="wine /home/vagrant/.wine/drive_c/Python27/python.exe"
 
 mkdir -p $WORKING_DIR
 mkdir -p $INSTDIR
@@ -48,7 +49,6 @@ sudo apt-get -y --no-install-recommends install wine
 wineboot -i
 wget https://www.python.org/ftp/python/2.7.6/python-2.7.6.msi
 wine msiexec /qn /i python-2.7.6.msi
-export PYTHON="wine /home/vagrant/.wine/drive_c/Python27/python.exe"
 
 
 # setuptools
