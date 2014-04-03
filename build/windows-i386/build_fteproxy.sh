@@ -19,8 +19,6 @@
 
 export WORKING_DIR=/vagrant/sandbox
 export INSTDIR=$WORKING_DIR/opt
-export LD_PRELOAD=/usr/lib/faketime/libfaketime.so.1
-export FAKETIME=$REFERENCE_DATETIME
 export TZ=UTC
 export LC_ALL=C
 export CFLAGS="-mwindows"
@@ -36,7 +34,6 @@ sudo dpkg-reconfigure locales
 # depdendencies
 sudo apt-get update
 
-sudo apt-get -y --no-install-recommends install build-essential
 sudo apt-get -y --no-install-recommends install upx
 sudo apt-get -y --no-install-recommends install m4
 sudo apt-get -y --no-install-recommends install git
@@ -44,7 +41,6 @@ sudo apt-get -y --no-install-recommends install zip
 sudo apt-get -y --no-install-recommends install g++-mingw-w64
 sudo apt-get -y --no-install-recommends install mingw-w64
 sudo apt-get -y --no-install-recommends install unzip
-sudo apt-get -y --no-install-recommends install faketime
 
 sudo add-apt-repository -y ppa:ubuntu-wine/ppa
 sudo apt-get update
@@ -52,9 +48,9 @@ sudo apt-get -y --no-install-recommends install wine
 
 
 # install python
-LD_PRELOAD= wineboot -i
+wineboot -i
 wget https://www.python.org/ftp/python/2.7.6/python-2.7.6.msi
-LD_PRELOAD= wine msiexec /qn /i python-2.7.6.msi
+wine msiexec /qn /i python-2.7.6.msi
 export PYTHON="wine /home/vagrant/.wine/drive_c/Python27/python.exe"
 
 
@@ -64,7 +60,7 @@ cp -rfv ../wine-wrappers .
 cd wine-wrappers
 mkdir -p build/bdist.win32/winexe/bundle-2.7
 cp -a /home/vagrant/.wine/drive_c/Python27/python27.dll build/bdist.win32/winexe/bundle-2.7/
-LD_PRELOAD= $PYTHON setup.py py2exe
+$PYTHON setup.py py2exe
 cp -a dist/gcc.exe dist/g++.exe dist/dllwrap.exe dist/swig.exe $WINEROOT/windows/
 cd ..
 
@@ -92,8 +88,8 @@ cd pycrypto-*
 # This is bogus, that we run the configure script in the build environment, but it seems to work.
 # https://bugs.launchpad.net/pycrypto/+bug/1096207 for ac_cv_func_malloc_0_nonnull.
 ac_cv_func_malloc_0_nonnull=yes sh configure --host=i686-w64-mingw32 --with-gmp=$INSTDIR/gmp
-LD_PRELOAD= $PYTHON setup.py build_ext -c mingw32
-LD_PRELOAD= $PYTHON setup.py install_lib
+$PYTHON setup.py build_ext -c mingw32
+$PYTHON setup.py install_lib
 cd ..
 
 
@@ -101,22 +97,22 @@ cd ..
 wget https://pypi.python.org/packages/source/z/zope.interface/zope.interface-3.6.7.zip
 unzip zope.interface-3.6.7.zip
 cd zope.interface-*
-LD_PRELOAD= $PYTHON setup.py build -c mingw32
-LD_PRELOAD= $PYTHON setup.py install_lib
+$PYTHON setup.py build -c mingw32
+$PYTHON setup.py install_lib
 cd ..
 
 
 # install twisted
 wget https://pypi.python.org/packages/2.7/T/Twisted/Twisted-13.2.0.win32-py2.7.msi
-LD_PRELOAD= wine msiexec /qn /i Twisted-13.2.0.win32-py2.7.msi
+wine msiexec /qn /i Twisted-13.2.0.win32-py2.7.msi
 
 
 # install obfsproxy
 wget https://pypi.python.org/packages/source/o/obfsproxy/obfsproxy-0.2.7.tar.gz
 tar xvf obfsproxy-0.2.7.tar.gz
 cd obfsproxy-*
-LD_PRELOAD= $PYTHON setup.py build -c mingw32
-LD_PRELOAD= $PYTHON setup.py install_lib
+$PYTHON setup.py build -c mingw32
+$PYTHON setup.py install_lib
 cd ..
 
 
@@ -124,14 +120,14 @@ cd ..
 wget https://pypi.python.org/packages/source/p/pyptlib/pyptlib-0.0.5.tar.gz
 tar xvf pyptlib-0.0.5.tar.gz
 cd pyptlib-*
-LD_PRELOAD= $PYTHON setup.py build -c mingw32
-LD_PRELOAD= $PYTHON setup.py install_lib
+$PYTHON setup.py build -c mingw32
+$PYTHON setup.py install_lib
 cd ..
 
 
 # buildfteproxy
 cd $WORKING_DIR
-LD_PRELOAD= git clone https://github.com/kpdyer/fteproxy.git
+git clone https://github.com/kpdyer/fteproxy.git
 cd fteproxy
 ln -s $INSTDIR/gmp thirdparty/gmp
 cp -a thirdparty/gmp/bin/*.dll .
@@ -139,5 +135,5 @@ cp -a /home/vagrant/.wine/drive_c/Python27/python27.dll .
 cp -a /usr/lib/gcc/i686-w64-mingw32/4.6/libstdc++-6.dll .
 cp -a /home/vagrant/.wine/drive_c/windows/system32/msvcr90.dll .
 mkdir dist
-LD_PRELOAD= make dist-windows-i386
-LD_PRELOAD= $PYTHON ./bin/fteproxy --mode test
+make dist-windows-i386
+$PYTHON ./bin/fteproxy --mode test
