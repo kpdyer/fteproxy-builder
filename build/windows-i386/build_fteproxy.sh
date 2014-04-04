@@ -139,6 +139,7 @@ git clone https://github.com/kpdyer/fteproxy.git
 cd fteproxy
 mkdir -p build/bdist.win32/winexe/bundle-2.7
 cp -a /home/vagrant/.wine/drive_c/Python27/python27.dll build/bdist.win32/winexe/bundle-2.7/
+cp -a /home/vagrant/.wine/drive_c/Python27/python27.dll .
 cp -a /home/vagrant/.wine/drive_c/Python27/msvcr90.dll .
 ln -s $INSTDIR/gmp thirdparty/gmp
 cp -a thirdparty/gmp/bin/libgmp-*.dll .
