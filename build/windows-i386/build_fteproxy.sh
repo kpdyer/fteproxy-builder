@@ -23,7 +23,6 @@ export CFLAGS="-mwindows"
 export CXXFLAGS="-mwindows"
 export LDFLAGS="-mwindows"
 export PYTHON="wine /home/vagrant/.wine/drive_c/Python27/python.exe"
-export PIP="wine /home/vagrant/.wine/drive_c/Python27/Scripts/pip.exe"
 
 mkdir -p $WORKING_DIR
 mkdir -p $INSTDIR
