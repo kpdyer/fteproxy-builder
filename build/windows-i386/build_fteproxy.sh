@@ -51,9 +51,13 @@ wget https://www.python.org/ftp/python/2.7.6/python-2.7.6.msi
 wine msiexec /qn /i python-2.7.6.msi
 
 
-# setuptools/distribute
-https://raw.github.com/pypa/pip/master/contrib/get-pip.py
-$PYTHON get-pip.py
+# install setuptools
+wget https://pypi.python.org/packages/source/s/setuptools/setuptools-3.4.1.tar.gz
+tar zxvf setuptools-3.4.1.tar.gz
+cd setuptools-*
+$PYTHON setup.py build_ext -c mingw32
+$PYTHON setup.py install_lib
+cd ..
 
 
 # install py2exe
