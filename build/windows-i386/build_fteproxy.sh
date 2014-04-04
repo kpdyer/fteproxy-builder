@@ -121,7 +121,6 @@ cd ..
 wget https://pypi.python.org/packages/source/o/obfsproxy/obfsproxy-0.2.4.tar.gz
 tar xvf obfsproxy-0.2.4.tar.gz
 cd obfsproxy-*
-$PYTHON setup.py build_ext -c mingw32
 $PYTHON setup.py install_lib
 cd ..
 
