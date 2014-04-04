@@ -20,6 +20,7 @@
 export WORKING_DIR=/vagrant/sandbox
 export INSTDIR=$WORKING_DIR/opt
 export CFLAGS="-mwindows"
+export CXXFLAGS="-mwindows"
 export LDFLAGS="-mwindows"
 export PYTHON="wine /home/vagrant/.wine/drive_c/Python27/python.exe"
 
