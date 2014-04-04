@@ -99,8 +99,8 @@ cd ..
 
 
 # install zope.interface
-wget https://pypi.python.org/packages/source/z/zope.interface/zope.interface-4.1.1.tar.gz
-tar xvf zope.interface-4.1.1.tar.gz
+wget https://pypi.python.org/packages/source/z/zope.interface/zope.interface-3.6.7.zip
+unzip zope.interface-3.6.7.zip
 cd zope.interface-*
 $PYTHON setup.py build_ext -c mingw32
 $PYTHON setup.py install_lib
