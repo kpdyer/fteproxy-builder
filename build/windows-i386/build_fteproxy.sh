@@ -76,6 +76,20 @@ cp -a dist/gcc.exe dist/g++.exe dist/dllwrap.exe dist/swig.exe $WINEROOT/windows
 cd ..
 
 
+# uninstall py2exe
+rm -rfv /home/vagrant/.wine/drive_c/Python27/Lib/site-packages/py2exe-0.6.9-py2.7.egg-info
+rm -rfv /home/vagrant/.wine/drive_c/Python27/Lib/site-packages/py2exe
+
+
+# install py2exe
+wget http://colocrossing.dl.sourceforge.net/project/py2exe/py2exe/0.6.9/py2exe-0.6.9.zip
+cd py2exe-*
+sudo ln -s /usr/i686-w64-mingw32/include/windows.h /usr/i686-w64-mingw32/include/Windows.h
+$PYTHON setup.py build_ext -c mingw32
+$PYTHON setup.py install_lib
+cd ..
+
+
 # install gmp
 wget https://ftp.gnu.org/gnu/gmp/gmp-5.1.3.tar.bz2
 tar xvf gmp-5.1.3.tar.bz2
@@ -99,10 +113,12 @@ cd ..
 
 
 # install zope.interface
-wget https://pypi.python.org/packages/2.7/z/zope.interface/zope.interface-3.6.7.win32-py2.7.exe
-7z x zope.interface-3.6.7.win32-py2.7.exe
-cp -a PLATLIB/* /home/vagrant/.wine/drive_c/Python27/Lib/site-packages/
-touch /home/vagrant/.wine/drive_c/Python27/Lib/site-packages/zope/__init__.py
+wget https://pypi.python.org/packages/source/z/zope.interface/zope.interface-3.6.7.zip
+unzip zope.interface-3.6.7.zip
+cd zope.interface-*
+$PYTHON setup.py build_ext -c mingw32
+$PYTHON setup.py install_lib
+cd ..
 
 
 # install twisted
