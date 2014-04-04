@@ -99,12 +99,9 @@ cd ..
 
 
 # install zope.interface
-wget https://pypi.python.org/packages/source/z/zope.interface/zope.interface-3.6.7.zip
-unzip zope.interface-3.6.7.zip
-cd zope.interface-*
-$PYTHON setup.py build_ext -c mingw32
-$PYTHON setup.py install_lib
-cd ..
+wget https://pypi.python.org/packages/2.7/z/zope.interface/zope.interface-3.6.7.win32-py2.7.exe
+7z x zope.interface-3.6.7.win32-py2.7.exe
+cp -a PLATLIB/* /home/vagrant/.wine/drive_c/Python27/Lib/site-packages/
 touch /home/vagrant/.wine/drive_c/Python27/Lib/site-packages/zope/__init__.py
 
 
