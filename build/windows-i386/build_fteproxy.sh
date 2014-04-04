@@ -55,7 +55,6 @@ wine msiexec /qn /i python-2.7.5.msi
 wget https://pypi.python.org/packages/source/s/setuptools/setuptools-1.4.tar.gz
 tar zxvf setuptools-1.4.tar.gz
 cd setuptools-*
-$PYTHON setup.py build_ext -c mingw32
 $PYTHON setup.py install_lib
 cd ..
 
@@ -131,7 +130,6 @@ cd ..
 wget https://pypi.python.org/packages/source/p/pyptlib/pyptlib-0.0.5.tar.gz
 tar xvf pyptlib-0.0.5.tar.gz
 cd pyptlib-*
-$PYTHON setup.py build_ext -c mingw32
 $PYTHON setup.py install_lib
 cd ..
 
