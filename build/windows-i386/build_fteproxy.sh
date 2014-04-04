@@ -23,6 +23,7 @@ export CFLAGS="-mwindows"
 export CXXFLAGS="-mwindows"
 export LDFLAGS="-mwindows"
 export PYTHON="wine /home/vagrant/.wine/drive_c/Python27/python.exe"
+export PIP="wine /home/vagrant/.wine/drive_c/Python27/Scripts/pip.exe"
 
 mkdir -p $WORKING_DIR
 mkdir -p $INSTDIR
@@ -41,7 +42,7 @@ sudo apt-get -y --no-install-recommends install g++-mingw-w64 mingw-w64
 
 sudo add-apt-repository -y ppa:ubuntu-wine/ppa
 sudo apt-get update
-sudo apt-get -y --no-install-recommends install wine1.6 wine1.6-dev
+sudo apt-get -y --no-install-recommends install wine1.7 wine1.7-dev
 
 
 # install python
