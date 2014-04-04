@@ -46,15 +46,15 @@ sudo apt-get -y --no-install-recommends install wine1.7 wine1.7-dev
 
 # install python
 wineboot -i
-wget https://www.python.org/ftp/python/2.7.6/python-2.7.6.msi
-wine msiexec /qn /i python-2.7.6.msi
+wget https://www.python.org/ftp/python/2.7.5/python-2.7.5.msi
+wine msiexec /qn /i python-2.7.5.msi
 
 
 # install setuptools
-wget https://pypi.python.org/packages/source/s/setuptools/setuptools-3.4.1.tar.gz
-tar zxvf setuptools-3.4.1.tar.gz
+wget https://pypi.python.org/packages/source/s/setuptools/setuptools-1.4.tar.gz
+tar zxvf setuptools-1.4.tar.gz
 cd setuptools-*
-$PYTHON setup.py build_ext -c mingw32
+$PYTHON setup.py build -c mingw32
 $PYTHON setup.py install_lib
 cd ..
 
@@ -76,21 +76,6 @@ cp -a dist/gcc.exe dist/g++.exe dist/dllwrap.exe dist/swig.exe $WINEROOT/windows
 cd ..
 
 
-# uninstall py2exe
-rm -rfv /home/vagrant/.wine/drive_c/Python27/Lib/site-packages/py2exe-0.6.9-py2.7.egg-info
-rm -rfv /home/vagrant/.wine/drive_c/Python27/Lib/site-packages/py2exe
-
-
-# install py2exe
-wget http://colocrossing.dl.sourceforge.net/project/py2exe/py2exe/0.6.9/py2exe-0.6.9.zip
-cd py2exe-*
-sudo ln -s /usr/i686-w64-mingw32/include/windows.h /usr/i686-w64-mingw32/include/Windows.h
-sudo ln -s /home/vagrant/.wine/drive_c/Python27/Lib /home/vagrant/.wine/drive_c/Python27/lib
-$PYTHON setup.py build_ext -c mingw32
-$PYTHON setup.py install_lib
-cd ..
-
-
 # install gmp
 wget https://ftp.gnu.org/gnu/gmp/gmp-5.1.3.tar.bz2
 tar xvf gmp-5.1.3.tar.bz2
@@ -108,24 +93,24 @@ cd pycrypto-*
 # This is bogus, that we run the configure script in the build environment, but it seems to work.
 # https://bugs.launchpad.net/pycrypto/+bug/1096207 for ac_cv_func_malloc_0_nonnull.
 ac_cv_func_malloc_0_nonnull=yes sh configure --host=i686-w64-mingw32
-$PYTHON setup.py build_ext -c mingw32
+$PYTHON setup.py build -c mingw32
 $PYTHON setup.py install_lib
 cd ..
 
 
 # install zope.interface
-wget https://pypi.python.org/packages/source/z/zope.interface/zope.interface-3.6.7.zip
-unzip zope.interface-3.6.7.zip
+wget https://pypi.python.org/packages/source/z/zope.interface/zope.interface-4.0.5.zip
+unzip zope.interface-4.0.5.zip
 cd zope.interface-*
-$PYTHON setup.py build_ext -c mingw32
+$PYTHON setup.py build -c mingw32
 $PYTHON setup.py install_lib
 cd ..
 
 
 # install twisted
 sudo ln -s /home/vagrant/.wine/drive_c/Python27/include/Python.h /home/vagrant/.wine/drive_c/Python27/include/python.h
-wget https://pypi.python.org/packages/source/T/Twisted/Twisted-13.2.0.tar.bz2
-tar xvf Twisted-13.2.0.tar.bz2
+wget https://pypi.python.org/packages/source/T/Twisted/Twisted-13.1.0.tar.bz2
+tar xvf Twisted-13.1.0.tar.bz2
 cd Twisted-*
 echo '[build_ext]\ncompiler=mingw32' > setup.cfg
 $PYTHON setup.py install_lib
@@ -133,10 +118,10 @@ cd ..
 
 
 # install obfsproxy
-wget https://pypi.python.org/packages/source/o/obfsproxy/obfsproxy-0.2.7.tar.gz
+wget https://pypi.python.org/packages/source/o/obfsproxy/obfsproxy-0.2.4.tar.gz
 tar xvf obfsproxy-0.2.7.tar.gz
 cd obfsproxy-*
-$PYTHON setup.py build_ext -c mingw32
+$PYTHON setup.py build -c mingw32
 $PYTHON setup.py install_lib
 cd ..
 
@@ -145,7 +130,7 @@ cd ..
 wget https://pypi.python.org/packages/source/p/pyptlib/pyptlib-0.0.5.tar.gz
 tar xvf pyptlib-0.0.5.tar.gz
 cd pyptlib-*
-$PYTHON setup.py build_ext -c mingw32
+$PYTHON setup.py build -c mingw32
 $PYTHON setup.py install_lib
 cd ..
 
