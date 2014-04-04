@@ -85,6 +85,7 @@ rm -rfv /home/vagrant/.wine/drive_c/Python27/Lib/site-packages/py2exe
 wget http://colocrossing.dl.sourceforge.net/project/py2exe/py2exe/0.6.9/py2exe-0.6.9.zip
 cd py2exe-*
 sudo ln -s /usr/i686-w64-mingw32/include/windows.h /usr/i686-w64-mingw32/include/Windows.h
+sudo ln -s /home/vagrant/.wine/drive_c/Python27/Lib /home/vagrant/.wine/drive_c/Python27/lib
 $PYTHON setup.py build_ext -c mingw32
 $PYTHON setup.py install_lib
 cd ..
