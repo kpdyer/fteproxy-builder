@@ -140,8 +140,6 @@ cd $WORKING_DIR
 git clone https://github.com/kpdyer/fteproxy.git
 cd fteproxy
 ln -s $INSTDIR/gmp thirdparty/gmp
-cp -a thirdparty/gmp/bin/*.dll dist/
-cp -a /home/vagrant/.wine/drive_c/Python27/python27.dll dist/
-cp -a /home/vagrant/.wine/drive_c/Python27/msvcr90.dll dist/
+cp -a thirdparty/gmp/bin/libgmp-*.dll dist/
 make dist-windows-i386
 $PYTHON ./bin/fteproxy --mode test
