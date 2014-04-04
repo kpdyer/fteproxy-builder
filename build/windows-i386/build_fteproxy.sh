@@ -66,10 +66,6 @@ $PYTHON setup.py build_ext -c mingw32
 $PYTHON setup.py install_lib
 cd ..
 
-wget http://softlayer-ams.dl.sourceforge.net/project/py2exe/py2exe/0.6.9/py2exe-0.6.9.win32-py2.7.exe
-7z x py2exe-0.6.9.win32-py2.7.exe
-cp -a PLATLIB/* /home/vagrant/.wine/drive_c/Python27/Lib/site-packages/
-
 
 # install wrappers, to expose mingw compilers to wine
 export WINEROOT=$HOME/.wine/drive_c
