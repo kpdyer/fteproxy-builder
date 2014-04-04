@@ -40,7 +40,7 @@ sudo apt-get -y --no-install-recommends install g++-mingw-w64 mingw-w64
 
 sudo add-apt-repository -y ppa:ubuntu-wine/ppa
 sudo apt-get update
-sudo apt-get -y --no-install-recommends install wine
+sudo apt-get -y --no-install-recommends install wine1.6 wine1.6-dev
 
 
 # install python
@@ -91,7 +91,7 @@ tar xvf pycrypto-2.6.1.tar.gz
 cd pycrypto-*
 # This is bogus, that we run the configure script in the build environment, but it seems to work.
 # https://bugs.launchpad.net/pycrypto/+bug/1096207 for ac_cv_func_malloc_0_nonnull.
-CPPFLAGS="-L$INSTDIR/gmp/bin -I$INSTDIR/gmp/include" ac_cv_func_malloc_0_nonnull=yes sh configure --host=i686-w64-mingw32
+ac_cv_func_malloc_0_nonnull=yes sh configure --host=i686-w64-mingw32
 $PYTHON setup.py build_ext -c mingw32
 $PYTHON setup.py install_lib
 cd ..
@@ -112,7 +112,7 @@ sudo ln -s /home/vagrant/.wine/drive_c/Python27/include/Python.h /home/vagrant/.
 wget https://pypi.python.org/packages/source/T/Twisted/Twisted-13.2.0.tar.bz2
 tar xvf Twisted-13.2.0.tar.bz2
 cd Twisted-*
-echo $'[build_ext]\ncompiler=mingw32' > setup.cfg
+echo '[build_ext]\ncompiler=mingw32' > setup.cfg
 $PYTHON setup.py install_lib
 cd ..
 
