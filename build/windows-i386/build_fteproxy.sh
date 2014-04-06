@@ -73,17 +73,6 @@ rm -rfv PLATLIB
 rm -rfv SCRIPTS
 
 
-# pywin32
-wget http://superb-dca2.dl.sourceforge.net/project/pywin32/pywin32/Build%20218/pywin32-218.win32-py2.7.exe
-7z x pywin32-218.win32-py2.7.exe
-cp -a PLATLIB/* /home/vagrant/.wine/drive_c/Python27/Lib/site-packages/
-cp -a SCRIPTS/* /home/vagrant/.wine/drive_c/Python27/Lib/site-packages/
-$PYTHON /home/vagrant/.wine/drive_c/Python27/Lib/site-packages/pywin32_postinstall.py -install
-rm /home/vagrant/.wine/drive_c/Python27/Lib/site-packages/pywin32_postinstall.py
-rm -rfv PLATLIB
-rm -rfv SCRIPTS
-
-
 # pyinstaller
 wget https://pypi.python.org/packages/source/P/PyInstaller/PyInstaller-2.1.tar.gz
 tar xvf PyInstaller-2.1.tar.gz
