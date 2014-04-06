@@ -23,6 +23,7 @@ export CFLAGS="-mwindows"
 export CXXFLAGS="-mwindows"
 export LDFLAGS="-mwindows"
 export PYTHON="wine /home/vagrant/.wine/drive_c/Python27/python.exe"
+export PYINST="$PYTHON $WORKING_DIR/PyInstaller-2.1/pyinstaller.py"
 
 mkdir -p $WORKING_DIR
 mkdir -p $INSTDIR
@@ -57,7 +58,7 @@ sed -i 's/self.dll_libraries = get_msvcr()/pass#self.dll_libraries = get_msvcr()
 wget https://pypi.python.org/packages/source/s/setuptools/setuptools-1.4.tar.gz
 tar zxvf setuptools-1.4.tar.gz
 cd setuptools-*
-$PYTHON setup.py install_lib
+$PYTHON setup.py install
 cd ..
 
 
@@ -65,6 +66,27 @@ cd ..
 wget http://softlayer-ams.dl.sourceforge.net/project/py2exe/py2exe/0.6.9/py2exe-0.6.9.win32-py2.7.exe
 7z x py2exe-0.6.9.win32-py2.7.exe
 cp -a PLATLIB/* /home/vagrant/.wine/drive_c/Python27/Lib/site-packages/
+cp -a SCRIPTS/* /home/vagrant/.wine/drive_c/Python27/Lib/site-packages/
+$PYTHON /home/vagrant/.wine/drive_c/Python27/Lib/site-packages/py2exe_postinstall.py -install
+rm /home/vagrant/.wine/drive_c/Python27/Lib/site-packages/py2exe_postinstall.py
+rm -rfv PLATLIB
+rm -rfv SCRIPTS
+
+
+# pywin32
+wget http://superb-dca2.dl.sourceforge.net/project/pywin32/pywin32/Build%20218/pywin32-218.win32-py2.7.exe
+7z x pywin32-218.win32-py2.7.exe
+cp -a PLATLIB/* /home/vagrant/.wine/drive_c/Python27/Lib/site-packages/
+cp -a SCRIPTS/* /home/vagrant/.wine/drive_c/Python27/Lib/site-packages/
+$PYTHON /home/vagrant/.wine/drive_c/Python27/Lib/site-packages/pywin32_postinstall.py -install
+rm /home/vagrant/.wine/drive_c/Python27/Lib/site-packages/pywin32_postinstall.py
+rm -rfv PLATLIB
+rm -rfv SCRIPTS
+
+
+# pyinstaller
+wget https://pypi.python.org/packages/source/P/PyInstaller/PyInstaller-2.1.tar.gz
+tar xvf PyInstaller-2.1.tar.gz
 
 
 # install wrappers, to expose mingw compilers to wine
@@ -96,7 +118,7 @@ cd pycrypto-*
 # https://bugs.launchpad.net/pycrypto/+bug/1096207 for ac_cv_func_malloc_0_nonnull.
 ac_cv_func_malloc_0_nonnull=yes sh configure --host=i686-w64-mingw32
 $PYTHON setup.py build_ext -c mingw32
-$PYTHON setup.py install_lib
+$PYTHON setup.py install
 cd ..
 
 
@@ -105,7 +127,7 @@ wget https://pypi.python.org/packages/source/z/zope.interface/zope.interface-4.0
 unzip zope.interface-4.0.5.zip
 cd zope.interface-*
 $PYTHON setup.py build_ext -c mingw32
-$PYTHON setup.py install_lib
+$PYTHON setup.py install
 cd ..
 
 
@@ -115,7 +137,7 @@ wget https://pypi.python.org/packages/source/T/Twisted/Twisted-13.1.0.tar.bz2
 tar xvf Twisted-13.1.0.tar.bz2
 cd Twisted-*
 echo '[build_ext]\ncompiler=mingw32' > setup.cfg
-$PYTHON setup.py install_lib
+$PYTHON setup.py install
 cd ..
 
 
@@ -123,7 +145,7 @@ cd ..
 wget https://pypi.python.org/packages/source/o/obfsproxy/obfsproxy-0.2.4.tar.gz
 tar xvf obfsproxy-0.2.4.tar.gz
 cd obfsproxy-*
-$PYTHON setup.py install_lib
+$PYTHON setup.py install
 cd ..
 
 
@@ -131,7 +153,7 @@ cd ..
 wget https://pypi.python.org/packages/source/p/pyptlib/pyptlib-0.0.5.tar.gz
 tar xvf pyptlib-0.0.5.tar.gz
 cd pyptlib-*
-$PYTHON setup.py install_lib
+$PYTHON setup.py install
 cd ..
 
 
