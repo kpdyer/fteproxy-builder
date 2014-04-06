@@ -23,7 +23,7 @@ export CFLAGS="-mwindows"
 export CXXFLAGS="-mwindows"
 export LDFLAGS="-mwindows"
 export PYTHON="wine /home/vagrant/.wine/drive_c/Python27/python.exe"
-export PYINST="$PYTHON $WORKING_DIR/PyInstaller-2.1/pyinstaller"
+export PYINST="$PYTHON $WORKING_DIR/PyInstaller-2.1/pyinstaller.py"
 
 mkdir -p $WORKING_DIR
 mkdir -p $INSTDIR
