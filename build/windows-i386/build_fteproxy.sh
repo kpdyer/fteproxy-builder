@@ -55,7 +55,7 @@ wine msiexec /qn /i python-2.7.5.msi
 wget https://pypi.python.org/packages/source/s/setuptools/setuptools-1.4.tar.gz
 tar zxvf setuptools-1.4.tar.gz
 cd setuptools-*
-$PYTHON setup.py install_lib
+$PYTHON setup.py install
 cd ..
 
 
@@ -94,7 +94,7 @@ cd pycrypto-*
 # https://bugs.launchpad.net/pycrypto/+bug/1096207 for ac_cv_func_malloc_0_nonnull.
 ac_cv_func_malloc_0_nonnull=yes sh configure --host=i686-w64-mingw32
 $PYTHON setup.py build_ext -c mingw32
-$PYTHON setup.py install_lib
+$PYTHON setup.py install
 cd ..
 
 
@@ -103,7 +103,7 @@ wget https://pypi.python.org/packages/source/z/zope.interface/zope.interface-4.0
 unzip zope.interface-4.0.5.zip
 cd zope.interface-*
 $PYTHON setup.py build_ext -c mingw32
-$PYTHON setup.py install_lib
+$PYTHON setup.py install
 cd ..
 
 
@@ -113,7 +113,7 @@ wget https://pypi.python.org/packages/source/T/Twisted/Twisted-13.1.0.tar.bz2
 tar xvf Twisted-13.1.0.tar.bz2
 cd Twisted-*
 echo '[build_ext]\ncompiler=mingw32' > setup.cfg
-$PYTHON setup.py install_lib
+$PYTHON setup.py install
 cd ..
 
 
@@ -121,7 +121,7 @@ cd ..
 wget https://pypi.python.org/packages/source/o/obfsproxy/obfsproxy-0.2.4.tar.gz
 tar xvf obfsproxy-0.2.4.tar.gz
 cd obfsproxy-*
-$PYTHON setup.py install_lib
+$PYTHON setup.py install
 cd ..
 
 
@@ -129,7 +129,7 @@ cd ..
 wget https://pypi.python.org/packages/source/p/pyptlib/pyptlib-0.0.5.tar.gz
 tar xvf pyptlib-0.0.5.tar.gz
 cd pyptlib-*
-$PYTHON setup.py install_lib
+$PYTHON setup.py install
 cd ..
 
 
