@@ -23,7 +23,6 @@ export CFLAGS="-mwindows"
 export CXXFLAGS="-mwindows"
 export LDFLAGS="-mwindows"
 export PYTHON="wine /home/vagrant/.wine/drive_c/Python27/python.exe"
-export PYINST="$PYTHON $WORKING_DIR/PyInstaller-2.1/pyinstaller.py"
 
 mkdir -p $WORKING_DIR
 mkdir -p $INSTDIR
@@ -71,11 +70,6 @@ $PYTHON /home/vagrant/.wine/drive_c/Python27/Lib/site-packages/py2exe_postinstal
 rm /home/vagrant/.wine/drive_c/Python27/Lib/site-packages/py2exe_postinstall.py
 rm -rfv PLATLIB
 rm -rfv SCRIPTS
-
-
-# pyinstaller
-wget https://pypi.python.org/packages/source/P/PyInstaller/PyInstaller-2.1.tar.gz
-tar xvf PyInstaller-2.1.tar.gz
 
 
 # install wrappers, to expose mingw compilers to wine
