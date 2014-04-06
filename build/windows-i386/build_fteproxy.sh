@@ -38,17 +38,19 @@ sudo apt-get -y --no-install-recommends install m4
 sudo apt-get -y --no-install-recommends install git
 sudo apt-get -y --no-install-recommends install zip unzip p7zip-full
 sudo apt-get -y --no-install-recommends install g++-mingw-w64 mingw-w64
-sudo apt-get -y --no-install-recommends install python-dev
+sudo apt-get -y --no-install-recommends install software-properties-common python-software-properties
 
 sudo add-apt-repository -y ppa:ubuntu-wine/ppa
 sudo apt-get update
-sudo apt-get -y --no-install-recommends install wine
+sudo apt-get -y --no-install-recommends install wine1.6
 
 
 # install python
 wineboot -i
 wget https://www.python.org/ftp/python/2.7.5/python-2.7.5.msi
 wine msiexec /qn /i python-2.7.5.msi
+# http://bugs.python.org/issue16472
+sed -i 's/self.dll_libraries = get_msvcr()/pass#self.dll_libraries = get_msvcr()/g' /home/vagrant/.wine/drive_c/Python27/Lib/distutils/cygwinccompiler.py
 
 
 # install setuptools
