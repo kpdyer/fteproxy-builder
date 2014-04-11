@@ -153,6 +153,8 @@ wget https://pypi.python.org/packages/source/f/fte/fte-0.0.1.tar.gz
 tar xvf fte-0.0.1.tar.gz
 cd fte-*
 WINDOWS_BUILD=1 CROSS_COMPILE=1 make libre2.a # hack
+ln -s $INSTDIR/gmp thirdparty/gmp
+cp -a thirdparty/gmp/bin/libgmp-*.dll .
 $PYTHON setup.py build_ext -c mingw32
 $PYTHON setup.py install_lib
 cd ..
@@ -165,7 +167,6 @@ cd fteproxy
 mkdir -p build/bdist.win32/winexe/bundle-2.7
 cp -a /home/vagrant/.wine/drive_c/Python27/python27.dll build/bdist.win32/winexe/bundle-2.7/
 cp -a /home/vagrant/.wine/drive_c/Python27/python27.dll .
-ln -s $INSTDIR/gmp thirdparty/gmp
 cp -a thirdparty/gmp/bin/libgmp-*.dll .
 make dist-windows-i386
 $PYTHON ./bin/fteproxy --mode test
