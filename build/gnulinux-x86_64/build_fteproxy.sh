@@ -38,9 +38,11 @@ sudo pip install --upgrade pip
 sudo pip install --upgrade setuptools
 sudo pip install --upgrade twisted
 sudo pip install --upgrade pycrypto
+sudo pip install --upgrade pyyaml
 sudo pip install --upgrade obfsproxy
 sudo pip install --upgrade pyptlib
 sudo pip install --upgrade pyinstaller
+sudo pip install --upgrade fte
 
 # see: https://github.com/kpdyer/fteproxy/issues/66
 sudo touch /usr/local/lib/python2.7/dist-packages/zope/__init__.py

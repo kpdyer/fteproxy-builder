@@ -21,6 +21,21 @@
 export CFLAGS=-Qunused-arguments
 export CPPFLAGS=-Qunused-arguments
 
+brew install --build-from-source python
+brew install --build-from-source gmp
+brew install --build-from-source git
+brew install --build-from-source upx
+
+sudo pip install --upgrade pip
+sudo pip install --upgrade setuptools
+sudo pip install --upgrade twisted
+sudo pip install --upgrade pycrypto
+sudo pip install --upgrade pyyaml 
+sudo pip install --upgrade obfsproxy
+sudo pip install --upgrade pyptlib
+sudo pip install --upgrade pyinstaller
+sudo pip install --upgrade fte
+
 mkdir sandbox
 cd sandbox
 git clone https://github.com/kpdyer/fteproxy.git

@@ -19,9 +19,9 @@
 
 export WORKING_DIR=/vagrant/sandbox
 export INSTDIR=$WORKING_DIR/opt
-export CFLAGS="-mwindows"
-export CXXFLAGS="-mwindows"
-export LDFLAGS="-mwindows"
+export CFLAGS="-mwindows -Ithirdparty/gmp/include -Lthirdparty/gmp/bin"
+export CXXFLAGS="-mwindows -Ithirdparty/gmp/include -Lthirdparty/gmp/bin"
+export LDFLAGS="-mwindows -Ithirdparty/gmp/include -Lthirdparty/gmp/bin"
 export PYTHON="wine /home/vagrant/.wine/drive_c/Python27/python.exe"
 
 mkdir -p $WORKING_DIR
@@ -124,6 +124,14 @@ $PYTHON setup.py install
 cd ..
 
 
+# install yaml
+wget https://pypi.python.org/packages/source/P/PyYAML/PyYAML-3.11.tar.gz
+tar xvf PyYAML-3.11.tar.gz
+cd PyYAML-*
+$PYTHON setup.py install_lib
+cd ..
+
+
 # install obfsproxy
 wget https://pypi.python.org/packages/source/o/obfsproxy/obfsproxy-0.2.4.tar.gz
 tar xvf obfsproxy-0.2.4.tar.gz
@@ -140,7 +148,17 @@ $PYTHON setup.py install_lib
 cd ..
 
 
-# buildfteproxy
+# install fte
+wget https://pypi.python.org/packages/source/f/fte/fte-0.0.1.tar.gz
+tar xvf fte-0.0.1.tar.gz
+cd fte-*
+WINDOWS_BUILD=1 CROSS_COMPILE=1 make libre2.a # hack
+$PYTHON setup.py build_ext -c mingw32
+$PYTHON setup.py install_lib
+cd ..
+
+
+# build fteproxy
 cd $WORKING_DIR
 git clone https://github.com/kpdyer/fteproxy.git
 cd fteproxy
