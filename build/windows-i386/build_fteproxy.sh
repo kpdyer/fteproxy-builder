@@ -156,6 +156,7 @@ mv libfte fte-unstable
 cd fte-*
 WINDOWS_BUILD=1 CROSS_COMPILE=1 make libre2.a # hack
 ln -s $INSTDIR/gmp thirdparty/gmp
+cp -a thirdparty/gmp/bin/libgmp-*.dll .
 $PYTHON setup.py build_ext -c mingw32
 $PYTHON setup.py install_lib
 cd ..
@@ -167,9 +168,8 @@ git clone https://github.com/kpdyer/fteproxy.git
 cd fteproxy
 mkdir -p build/bdist.win32/winexe/bundle-2.7
 cp -a /home/vagrant/.wine/drive_c/Python27/python27.dll build/bdist.win32/winexe/bundle-2.7/
-mkdir dist
-cp -a /home/vagrant/.wine/drive_c/Python27/python27.dll dist/
+mkdir -p dist
 cp -a $INSTDIR/gmp/bin/libgmp-*.dll dist/
-cp -a $INSTDIR/gmp/bin/libgmp-*.dll .
+cp -a /home/vagrant/.wine/drive_c/Python27/python27.dll dist/
 make dist-windows-i386
 $PYTHON ./bin/fteproxy --mode test
