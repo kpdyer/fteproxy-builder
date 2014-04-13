@@ -19,9 +19,9 @@
 
 export WORKING_DIR=/vagrant/sandbox
 export INSTDIR=$WORKING_DIR/opt
-export CFLAGS="-mwindows -Ithirdparty/gmp/include -Lthirdparty/gmp/bin"
-export CXXFLAGS="-mwindows -Ithirdparty/gmp/include -Lthirdparty/gmp/bin"
-export LDFLAGS="-mwindows -Ithirdparty/gmp/include -Lthirdparty/gmp/bin"
+export CFLAGS="-mwindows -I$INSTDIR/gmp/include -L$INSTDIR/gmp/bin"
+export CXXFLAGS="-mwindows -I$INSTDIR/gmp/include -L$INSTDIR/gmp/bin"
+export LDFLAGS="-mwindows"
 export PYTHON="wine /home/vagrant/.wine/drive_c/Python27/python.exe"
 
 mkdir -p $WORKING_DIR
@@ -149,10 +149,13 @@ cd ..
 
 
 # install fte
-wget https://pypi.python.org/packages/source/f/fte/fte-0.0.1.tar.gz
-tar xvf fte-0.0.1.tar.gz
+# wget https://pypi.python.org/packages/source/f/fte/fte-0.0.1.tar.gz
+git clone https://github.com/kpdyer/libfte.git
+mv libfte fte-unstable
+# tar xvf fte-0.0.1.tar.gz
 cd fte-*
 WINDOWS_BUILD=1 CROSS_COMPILE=1 make libre2.a # hack
+ln -s $INSTDIR/gmp thirdparty/gmp
 $PYTHON setup.py build_ext -c mingw32
 $PYTHON setup.py install_lib
 cd ..
@@ -164,8 +167,9 @@ git clone https://github.com/kpdyer/fteproxy.git
 cd fteproxy
 mkdir -p build/bdist.win32/winexe/bundle-2.7
 cp -a /home/vagrant/.wine/drive_c/Python27/python27.dll build/bdist.win32/winexe/bundle-2.7/
-cp -a /home/vagrant/.wine/drive_c/Python27/python27.dll .
-ln -s $INSTDIR/gmp thirdparty/gmp
-cp -a thirdparty/gmp/bin/libgmp-*.dll .
+mkdir dist
+cp -a /home/vagrant/.wine/drive_c/Python27/python27.dll dist/
+cp -a $INSTDIR/gmp/bin/libgmp-*.dll dist/
+cp -a $INSTDIR/gmp/bin/libgmp-*.dll .
 make dist-windows-i386
 $PYTHON ./bin/fteproxy --mode test
