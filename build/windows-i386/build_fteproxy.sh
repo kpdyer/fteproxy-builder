@@ -170,7 +170,7 @@ mkdir -p build/bdist.win32/winexe/bundle-2.7
 cp -a /home/vagrant/.wine/drive_c/Python27/python27.dll build/bdist.win32/winexe/bundle-2.7/
 mkdir -p dist
 cp -a $INSTDIR/gmp/bin/libgmp-10.dll dist/
-cp -a $INSTDIR/gmp/bin/libgmp-10.dll .
 cp -a /home/vagrant/.wine/drive_c/Python27/python27.dll dist/
+cp -a $INSTDIR/gmp/bin/libgmp-10.dll .
 make dist-windows-i386
 $PYTHON ./bin/fteproxy --mode test
