@@ -24,6 +24,7 @@ export CPPFLAGS=-Qunused-arguments
 brew install --build-from-source python
 brew install --build-from-source gmp
 brew install --build-from-source git
+brew install --build-from-source libyaml
 brew install --build-from-source upx
 
 sudo pip install --upgrade pip
