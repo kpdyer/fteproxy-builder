@@ -36,6 +36,8 @@ sudo pip install --upgrade pyptlib
 sudo pip install --upgrade pyinstaller
 sudo pip install --upgrade fte
 
+sudo touch /usr/local/lib/python2.7/site-packages/zope/__init__.py
+
 mkdir sandbox
 cd sandbox
 git clone https://github.com/kpdyer/fteproxy.git
