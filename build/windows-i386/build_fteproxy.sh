@@ -39,6 +39,7 @@ sudo apt-get -y --no-install-recommends install git
 sudo apt-get -y --no-install-recommends install zip unzip p7zip-full
 sudo apt-get -y --no-install-recommends install g++-mingw-w64 mingw-w64
 sudo apt-get -y --no-install-recommends install software-properties-common python-software-properties
+sudo DEBIAN_FRONTEND=noninteractive apt-get install -f
 
 sudo add-apt-repository -y ppa:ubuntu-wine/ppa
 sudo apt-get update
