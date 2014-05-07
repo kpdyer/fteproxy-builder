@@ -9,7 +9,7 @@ BUILD_DIR_ABSPATH=$(realpath $(BUILD_DIR))
 ARTIFACT_DIR_ABSPATH=$(realpath $(ARTIFACT_DIR))
 SSH_DIR_ABSPATH=$(realpath $(SSH_DIR))
 
-all: .envsetup src gnulinux-i386 gnulinux-x86_64 macosx-i386 windows-i386
+all: .envsetup src gnulinux-i386 gnulinux-x86_64 windows-i386 macosx-i386
 
 .envsetup:
 	chmod 600 $(SSH_DIR)/id_rsa

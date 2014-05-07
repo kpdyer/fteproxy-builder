@@ -29,20 +29,18 @@ sudo update-ca-certificates
 sudo apt-get -y --no-install-recommends install build-essential
 sudo apt-get -y --no-install-recommends install upx
 sudo apt-get -y --no-install-recommends install git-core
+sudo apt-get -y --no-install-recommends install python-dev
 sudo apt-get -y --no-install-recommends install libgmp-dev
 sudo apt-get -y --no-install-recommends install libyaml-dev
 sudo apt-get -y --no-install-recommends install python-pip
-sudo apt-get -y --no-install-recommends install python-dev
+sudo apt-get -y --no-install-recommends install python-twisted
+sudo apt-get -y --no-install-recommends install python-crypto
+sudo apt-get -y --no-install-recommends install python-pyptlib
+sudo apt-get -y --no-install-recommends install obfsproxy
 sudo apt-get -y --no-install-recommends install debhelper
 sudo DEBIAN_FRONTEND=noninteractive apt-get install -f
 
 sudo pip install --upgrade pip
-sudo pip install --upgrade setuptools
-sudo pip install --upgrade twisted
-sudo pip install --upgrade pycrypto
-sudo pip install --upgrade pyyaml
-sudo pip install --upgrade obfsproxy
-sudo pip install --upgrade pyptlib
 sudo pip install --upgrade pyinstaller
 sudo pip install --upgrade fte
 
@@ -52,6 +50,6 @@ sudo touch /usr/local/lib/python2.7/dist-packages/zope/__init__.py
 # fteproxy
 git clone https://github.com/kpdyer/fteproxy.git
 cd fteproxy
-make dist-linux-x86_64
+make dist-linux-i386
 make test
-make dist-deb
+#make dist-deb

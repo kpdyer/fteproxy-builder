@@ -21,7 +21,6 @@
 export CFLAGS=-Qunused-arguments
 export CPPFLAGS=-Qunused-arguments
 
-brew install --build-from-source python
 brew install --build-from-source gmp
 brew install --build-from-source git
 brew install --build-from-source libyaml
@@ -35,7 +34,7 @@ sudo pip install --upgrade pyyaml
 sudo pip install --upgrade obfsproxy
 sudo pip install --upgrade pyptlib
 sudo pip install --upgrade pyinstaller
-sudo pip install --upgrade fte
+sudo CFLAGS="-Qunused-arguments" CPPFLAGS="-Qunused-arguments" pip install --upgrade fte
 
 sudo touch /Library/Python/2.7/site-packages/zope/__init__.py
 
