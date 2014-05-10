@@ -2,8 +2,8 @@ BUILD_DIR=./build
 ARTIFACT_DIR=./dist
 SSH_DIR=./.ssh
 
-FTEPROXY_VER=0.3.0
-FTEPROXY_TAG=master#$(FTEPROXY_VER)
+FTEPROXY_VER=0.2.14
+FTEPROXY_TAG=$(FTEPROXY_VER)
 
 BUILD_DIR_ABSPATH=$(realpath $(BUILD_DIR))
 ARTIFACT_DIR_ABSPATH=$(realpath $(ARTIFACT_DIR))
@@ -35,14 +35,12 @@ dist/fteproxy-$(FTEPROXY_VER)-src.tar.gz:
 dist/fteproxy-$(FTEPROXY_VER)-linux-i386.tar.gz:
 	@cd $(BUILD_DIR_ABSPATH)/gnulinux-i386; \
 	vagrant up; \
-	cp sandbox/fteproxy/dist/*.tar.gz $(ARTIFACT_DIR_ABSPATH)/; \
-	cp sandbox/fteproxy/dist/*.deb $(ARTIFACT_DIR_ABSPATH)/
+	cp sandbox/fteproxy/dist/*.tar.gz $(ARTIFACT_DIR_ABSPATH)/
 
 dist/fteproxy-$(FTEPROXY_VER)-linux-x86_64.tar.gz:
 	@cd $(BUILD_DIR_ABSPATH)/gnulinux-x86_64; \
 	vagrant up; \
-	cp sandbox/fteproxy/dist/*.tar.gz $(ARTIFACT_DIR_ABSPATH)/; \
-	cp sandbox/fteproxy/dist/*.deb $(ARTIFACT_DIR_ABSPATH)/
+	cp sandbox/fteproxy/dist/*.tar.gz $(ARTIFACT_DIR_ABSPATH)/
 
 dist/fteproxy-$(FTEPROXY_VER)-darwin-i386.tar.gz:
 	@cd $(BUILD_DIR_ABSPATH)/macosx-i386; \
