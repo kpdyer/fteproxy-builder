@@ -92,7 +92,8 @@ sudo ln -s /home/vagrant/.wine/drive_c/Python27/include/Python.h /home/vagrant/.
 wget https://pypi.python.org/packages/source/T/Twisted/Twisted-13.1.0.tar.bz2
 tar xvf Twisted-13.1.0.tar.bz2
 cd Twisted-*
-echo '[build_ext]\ncompiler=mingw32' > setup.cfg
+echo '[build_ext]' > setup.cfg
+echo 'compiler=mingw32' >> setup.cfg
 $PYTHON setup.py install
 cd ..
 
