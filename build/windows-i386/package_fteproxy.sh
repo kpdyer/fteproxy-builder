@@ -14,6 +14,7 @@ $PYTHON ./bin/fteproxy --mode test
 $PYTHON setup.py py2exe
 
 cd dist
+mkdir -p fteproxy-$FTEPROXY_RELEASE
 mv *.dll fteproxy-$FTEPROXY_RELEASE/
 mv *.zip fteproxy-$FTEPROXY_RELEASE/
 mv *.exe fteproxy-$FTEPROXY_RELEASE/

@@ -18,10 +18,3 @@ sudo pip install --upgrade pyinstaller
 sudo CFLAGS="-Qunused-arguments" CPPFLAGS="-Qunused-arguments" pip install --upgrade fte
 
 sudo touch /Library/Python/2.7/site-packages/zope/__init__.py
-
-mkdir sandbox
-cd sandbox
-git clone https://github.com/kpdyer/fteproxy.git
-cd fteproxy
-make dist
-make test

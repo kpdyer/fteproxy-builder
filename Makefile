@@ -44,7 +44,7 @@ dist/fteproxy-$(FTEPROXY_VER)-linux-x86_64.tar.gz:
 
 dist/fteproxy-$(FTEPROXY_VER)-darwin-i386.tar.gz:
 	@cd $(BUILD_DIR_ABSPATH)/macosx-i386; \
-	./build_fteproxy.sh; \
+	./bootstrap.sh; \
 	cp sandbox/fteproxy/dist/*.tar.gz $(ARTIFACT_DIR_ABSPATH)/
 
 dist/fteproxy-$(FTEPROXY_VER)-windows-i386.zip:
