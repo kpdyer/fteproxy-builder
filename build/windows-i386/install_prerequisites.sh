@@ -1,31 +1,3 @@
-#!/bin/sh
-
-# This file is part of fteproxy.
-#
-# fteproxy is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-#
-# fteproxy is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with fteproxy.  If not, see <http://www.gnu.org/licenses/>.
-
-# Tested on Debian 7.1.0, Ubuntu 12.04/12.10/13.04/13.10:
-
-export WORKING_DIR=/vagrant/sandbox
-export INSTDIR=$WORKING_DIR/opt
-export CFLAGS="-mwindows -I$INSTDIR/gmp/include -L$INSTDIR/gmp/bin"
-export CXXFLAGS="-mwindows -I$INSTDIR/gmp/include -L$INSTDIR/gmp/bin"
-export LDFLAGS="-mwindows"
-export PYTHON="wine /home/vagrant/.wine/drive_c/Python27/python.exe"
-
-mkdir -p $WORKING_DIR
-mkdir -p $INSTDIR
 cd $WORKING_DIR
 
 sudo locale-gen en_US en_US.UTF-8
@@ -161,17 +133,3 @@ cp -a thirdparty/gmp/bin/libgmp-*.dll .
 $PYTHON setup.py build_ext -c mingw32
 $PYTHON setup.py install_lib
 cd ..
-
-
-# build fteproxy
-cd $WORKING_DIR
-git clone https://github.com/kpdyer/fteproxy.git
-cd fteproxy
-mkdir -p build/bdist.win32/winexe/bundle-2.7
-cp -a /home/vagrant/.wine/drive_c/Python27/python27.dll build/bdist.win32/winexe/bundle-2.7/
-mkdir -p dist
-cp -a $INSTDIR/gmp/bin/libgmp-10.dll dist/
-cp -a /home/vagrant/.wine/drive_c/Python27/python27.dll dist/
-cp -a $INSTDIR/gmp/bin/libgmp-10.dll .
-make dist-windows-i386
-$PYTHON ./bin/fteproxy --mode test

@@ -1,5 +1,6 @@
 #!/bin/sh
 
 cd /vagrant
-chmod 755 build_fteproxy.sh
-./build_fteproxy.sh
+source ./set_env.sh
+source ./install_prerequisites.sh
+source ./package_fteproxy.sh

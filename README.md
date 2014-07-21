@@ -38,6 +38,7 @@ For details on how to setup your environment, please see ```INSTALL```. In addit
     * ```ubuntu-12.04-i386``` - used to cross-compile for windows platform
     * ```debian-7.1.0-i386``` - used to produce 32-bit linux binaries
     * ```debian-7.1.0-amd64``` - used to produce 64-bit linux binaries
+* wget
 
 
 Author
