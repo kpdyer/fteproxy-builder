@@ -1,4 +1,4 @@
-dist
-dist/*
+dist/*.tar.gz
+dist/*.zip
 .envsetup
 vbox
